@@ -13,14 +13,14 @@ struct ProductList: View {
     private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
     @State private var product: Product? = nil
     var body: some View {
-        LazyVGrid(columns: columns){
-            ForEach(products){product in
+        LazyVGrid(columns: columns) {
+            ForEach(products) { product in
                 VStack {
-                    Button(action:{self.product = product}){
+                    Button(action: { self.product = product }) {
                         ProductListItem(product: product)
                     }
                     Button(action: {
-                        withAnimation{
+                        withAnimation {
                             cart.addToCart(addedProduct: product, quantity: 1)
                         }
                     }, label: {
@@ -36,10 +36,10 @@ struct ProductList: View {
                     }).accessibility(identifier: "Add to cart\(product.id)")
                 }
                 .background(Color.background
-                                .cornerRadius(16)
-                                .shadow(color: .darkText.opacity(0.05), radius: 2, x: 0.0, y: 0.0))
+                    .cornerRadius(16)
+                    .shadow(color: .darkText.opacity(0.05), radius: 2, x: 0.0, y: 0.0))
             }
-        }.sheet(item: $product){product in
+        }.sheet(item: $product) { product in
             ProductView(product: product).environmentObject(cart)
         }
     }
@@ -47,9 +47,8 @@ struct ProductList: View {
 
 struct ProductList_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView  {
+        NavigationView {
             ProductList(products: Product.sampleProducts).environmentObject(CartViewModel())
         }
     }
 }
-

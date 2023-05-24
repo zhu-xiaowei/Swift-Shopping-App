@@ -5,6 +5,7 @@
 //  Created by Djallil Elkebir on 2021-09-01.
 //
 
+import Clickstream
 import SwiftUI
 
 struct ProductView: View {
@@ -18,8 +19,8 @@ struct ProductView: View {
             Color.background.edgesIgnoringSafeArea(.bottom)
             VStack {
                 Spacer()
-                HStack{
-                    Button(action:{presentation.wrappedValue.dismiss()}){
+                HStack {
+                    Button(action: { presentation.wrappedValue.dismiss() }) {
                         Image(systemName: "xmark")
                             .padding(8)
                             .background(Color.secondaryBackground)
@@ -33,7 +34,7 @@ struct ProductView: View {
                     Color.background.edgesIgnoringSafeArea(.bottom)
                         .cornerRadius(25)
                         .shadow(color: .accentColor.opacity(0.2), radius: 3, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/)
-                    VStack(spacing: 0){
+                    VStack(spacing: 0) {
                         Text(product.title)
                             .font(.headline)
                             .multilineTextAlignment(.center)
@@ -55,16 +56,16 @@ struct ProductView: View {
                         VStack(spacing: 0) {
                             Text("Quantity").font(.headline)
                             Picker(selection: $quantity, label: /*@START_MENU_TOKEN@*/Text("Picker")/*@END_MENU_TOKEN@*/, content: {
-                                ForEach(1...10, id:\.self){quantity in
+                                ForEach(1 ... 10, id: \.self) { quantity in
                                     Text("\(quantity)").tag(quantity)
                                 }
-                                
+
                             }).pickerStyle(SegmentedPickerStyle())
-                            .padding()
+                                .padding()
                         }
                         Button(action: {
                             cart.addToCart(addedProduct: product, quantity: quantity)
-                        }){
+                        }) {
                             HStack {
                                 Text("Add to cart").bold()
                             }
@@ -74,6 +75,15 @@ struct ProductView: View {
                 Spacer()
             }
         }.navigationBarTitleDisplayMode(.large)
+            .onAppear {
+                let attributes: ClickstreamAttribute = [
+                    "product_id": product.id,
+                    "product_title": product.title,
+                    "product_price": product.price,
+                    "product_category": product.category,
+                ]
+                ClickstreamAnalytics.recordEvent(eventName: "product_click", attributes: attributes)
+            }
         // ajouter un navigation view vers le cart
     }
 }
@@ -83,7 +93,7 @@ struct ProductImage: View {
     @StateObject private var imageLoader = ImageLoader()
     let imageURL: URL
     var body: some View {
-        ZStack{
+        ZStack {
             Rectangle()
                 .fill(Color.white)
                 .frame(width: 260, height: 300, alignment: .center)
@@ -113,6 +123,7 @@ struct ProductImage: View {
         }
     }
 }
+
 struct ContentView_Previews: PreviewProvider {
     @Namespace static var namespace
     static var previews: some View {
@@ -121,5 +132,5 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-//.padding(.leading, product == products.first ? 12 : 0)
-//.padding(.trailing, product == products.last ? 12 : 0)
+// .padding(.leading, product == products.first ? 12 : 0)
+// .padding(.trailing, product == products.last ? 12 : 0)

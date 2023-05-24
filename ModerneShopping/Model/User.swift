@@ -25,6 +25,7 @@ struct Name: Codable {
 }
 
 struct Location: Codable {
+    var country: String
     var city: String
     var state: String
     var coordinates: Coordinate
