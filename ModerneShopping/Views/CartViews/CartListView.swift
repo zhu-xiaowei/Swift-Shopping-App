@@ -29,15 +29,16 @@ struct CartListView: View {
                                     .foregroundColor(.white)
                                 Spacer()
                             }
-                            .frame(width: 100)
+                            .frame(width: 35, height: 35)
                             .background(Color.red)
-                            .frame(width: 100)
+                            .cornerRadius(35)
+                            .padding(.trailing, 10)
                             Spacer()
                         }
                     }.disabled(!showDelete)
                     CartListItem(cart: cart,product: key, quantity: products[key] ?? 0)
                         .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                        .offset(x:showDelete ? 100 : 0)
+                        .offset(x:showDelete ? 40 : 0)
                 }.listRowBackground(Color.background)
             }
         }

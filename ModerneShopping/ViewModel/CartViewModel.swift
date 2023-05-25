@@ -26,7 +26,7 @@ class CartViewModel: ObservableObject {
             "product_category": addedProduct.category,
         ]
         ClickstreamAnalytics.recordEvent(eventName: "add_to_cart", attributes: attributes)
-        
+
         let products = cartProductDic.map(\.key)
         // if we don't have any product we just create it with our quantity and leave the func
         if products.isEmpty {
@@ -67,6 +67,13 @@ class CartViewModel: ObservableObject {
     }
 
     func removeFromCart(toRemove: Product) {
+        let attributes: ClickstreamAttribute = [
+            "product_id": toRemove.id,
+            "product_title": toRemove.title,
+            "product_price": toRemove.price,
+            "product_category": toRemove.category,
+        ]
+        ClickstreamAnalytics.recordEvent(eventName: "cart_delete", attributes: attributes)
         cartProductDic.removeValue(forKey: toRemove)
     }
 }

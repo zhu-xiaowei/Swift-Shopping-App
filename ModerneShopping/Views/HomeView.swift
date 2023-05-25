@@ -5,6 +5,7 @@
 //  Created by Djallil Elkebir on 2021-09-02.
 //
 
+import Clickstream
 import SwiftUI
 
 struct HomeView: View {
@@ -13,10 +14,10 @@ struct HomeView: View {
     @ObservedObject var user: UserViewModel
     @State var pickedCategory: ProductListEndpoint = .all
     var body: some View {
-        NavigationView{
+        NavigationView {
             ZStack {
                 Color.background.edgesIgnoringSafeArea(.all)
-                ScrollView(.vertical){
+                ScrollView(.vertical) {
                     VStack(alignment: .center) {
                         Text("Hello \(user.user?.results[0].name.first ?? "")! \n Enjoy your shopping 🥳")
                             .font(.title).bold()
@@ -24,7 +25,11 @@ struct HomeView: View {
                             .multilineTextAlignment(.center)
                             .padding()
                         CustomPicker(choosenCategory: $pickedCategory)
-                            .onChange(of: pickedCategory, perform: { value in
+                            .onChange(of: pickedCategory, perform: { _ in
+                                let attribute: ClickstreamAttribute = [
+                                    "category_name": pickedCategory.rawValue.trim()
+                                ]
+                                ClickstreamAnalytics.recordEvent(eventName: "category_click", attributes: attribute)
                                 DispatchQueue.main.async {
                                     productsList.loadProducts(with: pickedCategory)
                                 }
@@ -34,18 +39,18 @@ struct HomeView: View {
                                 .environmentObject(cart)
                                 .padding(.top)
                         } else {
-                            LoadingView(isLoading: productsList.isLoading, error: productsList.error){ productsList.loadProducts(with: pickedCategory)
-                            }
+                            LoadingView(isLoading: productsList.isLoading, error: productsList.error) { productsList.loadProducts(with: pickedCategory)
+                            }.padding(.top, 60)
                         }
                         if productsList.products != nil {
                             ProductList(products: productsList.products!)
                                 .environmentObject(cart)
                         } else {
-                            LoadingView(isLoading: productsList.isLoading, error: productsList.error){ productsList.loadProducts(with: pickedCategory)
+                            LoadingView(isLoading: false, error: productsList.error) { productsList.loadProducts(with: pickedCategory)
                             }
                         }
                     }
-                    .onAppear{
+                    .onAppear {
                         DispatchQueue.main.async {
                             productsList.loadProducts(with: pickedCategory)
                         }
@@ -53,16 +58,17 @@ struct HomeView: View {
                     Spacer(minLength: 40)
                 }
             }.navigationBarTitleDisplayMode(.large)
-            .navigationBarItems(
-                leading: NavigationLink(destination:ProfilView().environmentObject(user)){
-                    leadingBarItem(user: user.user?.results[0])
-                },
-                trailing:
+                .navigationBarItems(
+                    leading: NavigationLink(destination: ProfilView().environmentObject(user).onAppear {
+                        ClickstreamAnalytics.recordEvent(eventName: "home_profile_click")
+                    }) {
+                        leadingBarItem(user: user.user?.results[0])
+                    },
+                    trailing:
                     TrailingBarItem().environmentObject(cart)
-            )
+                )
         }.statusBar(hidden: true)
     }
-    
 }
 
 struct HomeView_Previews: PreviewProvider {
@@ -74,28 +80,29 @@ struct HomeView_Previews: PreviewProvider {
 struct TrailingBarItem: View {
     @EnvironmentObject var cart: CartViewModel
     var body: some View {
-        NavigationLink(destination: CartView(cartProducts: cart)){
-            Image(systemName:"cart")
+        NavigationLink(destination: CartView(cartProducts: cart).onAppear {
+            ClickstreamAnalytics.recordEvent(eventName: "home_cart_click")
+        }) {
+            Image(systemName: "cart")
                 .foregroundColor(.darkText)
                 .imageScale(.large)
                 .overlay(
                     VStack {
-                        if cart.cartProductDic.keys.count  > 0 {
+                        if cart.cartProductDic.keys.count > 0 {
                             ZStack {
                                 Circle().fill(Color.secondaryBackground)
                                 Text("\(cart.cartProductDic.keys.count)")
                                     .font(.caption)
-                                    .accessibility(identifier:"cartItemsNumber")
+                                    .accessibility(identifier: "cartItemsNumber")
                                     .foregroundColor(.darkText)
-                                    
                             }
                             Spacer()
                         }
                     }.offset(x: 10, y: -10)
-                    .shadow(color: .darkText.opacity(0.2), radius: 2, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/)
+                        .shadow(color: .darkText.opacity(0.2), radius: 2, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/)
                 )
         }.accentColor(.darkText)
-        .accessibility(identifier: "trailingNavigationBarItem")
+            .accessibility(identifier: "trailingNavigationBarItem")
     }
 }
 
@@ -108,16 +115,15 @@ struct leadingBarItem: View {
                 .fill(Color.secondaryBackground)
                 .frame(width: 40, height: 40)
                 .overlay(
-                    Group{
+                    Group {
                         if let user = self.user {
-                            if let image = imageLoader.image{
+                            if let image = imageLoader.image {
                                 Image(uiImage: image)
                                     .resizable()
                                     .clipped()
                                     .clipShape(Circle())
-                            }
-                            else {
-                                LoadingView(isLoading: imageLoader.isLoading, error: nil, retryAction:{ imageLoader.loadImage(with: URL(string: user.picture.thumbnail)!)})
+                            } else {
+                                LoadingView(isLoading: imageLoader.isLoading, error: nil, retryAction: { imageLoader.loadImage(with: URL(string: user.picture.thumbnail)!) })
                             }
                         } else {
                             Image(systemName: "person")
@@ -127,11 +133,10 @@ struct leadingBarItem: View {
                     }
                 )
                 .overlay(Circle().stroke(lineWidth: 2).foregroundColor(Color.darkText))
-        }.onAppear{
-            if let user = self.user{
+        }.onAppear {
+            if let user = self.user {
                 imageLoader.loadImage(with: URL(string: user.picture.thumbnail)!)
             }
         }
     }
-    
 }

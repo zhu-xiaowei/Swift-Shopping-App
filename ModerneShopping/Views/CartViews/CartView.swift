@@ -75,7 +75,10 @@ struct CartView: View {
     }
 
     var trailingItem: some View {
-        Button(action: { withAnimation { showDelete.toggle() }}) {
+        Button(action: { withAnimation {
+            showDelete.toggle()
+            ClickstreamAnalytics.recordEvent(eventName: "cart_show_delete_click")
+        }}) {
             Image(systemName: "slider.horizontal.3")
         }.accentColor(.darkText)
     }

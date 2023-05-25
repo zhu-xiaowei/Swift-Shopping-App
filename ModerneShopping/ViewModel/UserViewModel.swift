@@ -28,7 +28,6 @@ class UserViewModel: ObservableObject {
     func loadUser() {
         // setting the user to nil to load a fresh one
         user = nil
-        ClickstreamAnalytics.setUserId(userId: nil)
         // showing the spining loading view, using the main thread for UI Work
         DispatchQueue.main.async {
             self.isLoading = true
@@ -75,6 +74,7 @@ class UserViewModel: ObservableObject {
             self.user = nil
             self.isLoading = false
         }
+        ClickstreamAnalytics.setUserId(userId: nil)
     }
 
     /// validate if the username respect our conditions

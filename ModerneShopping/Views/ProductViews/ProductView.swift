@@ -14,6 +14,7 @@ struct ProductView: View {
     // deprecated in iOS 15 we should use @Environment(.\dismiss) var dismiss
     @State private var quantity: Int = 1
     let product: Product
+    public static var isShow = false
     var body: some View {
         ZStack {
             Color.background.edgesIgnoringSafeArea(.bottom)
@@ -65,6 +66,10 @@ struct ProductView: View {
                         }
                         Button(action: {
                             cart.addToCart(addedProduct: product, quantity: quantity)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                presentation.wrappedValue.dismiss()
+                            }
+                            
                         }) {
                             HStack {
                                 Text("Add to cart").bold()
@@ -83,6 +88,9 @@ struct ProductView: View {
                     "product_category": product.category,
                 ]
                 ClickstreamAnalytics.recordEvent(eventName: "product_click", attributes: attributes)
+                ProductView.isShow = true
+            }.onDisappear{
+                ProductView.isShow = false
             }
         // ajouter un navigation view vers le cart
     }

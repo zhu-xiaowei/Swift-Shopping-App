@@ -14,18 +14,18 @@ struct LoginView: View {
     @State private var showPassword: Bool = false
     @State private var showSheet: Bool = false
     var body: some View {
-        ZStack{
+        ZStack {
             Color.background.edgesIgnoringSafeArea(.all)
-            VStack(alignment: .center,spacing: 16){
+            VStack(alignment: .center, spacing: 16) {
                 Text("Login")
                     .font(.title3).bold()
                 LoginLottieView()
                     .aspectRatio(contentMode: .fit)
                 Spacer()
-                VStack{
+                VStack {
                     HStack {
                         LoginTextView(name: $user.login, isValid: $user.isNameValid)
-                        if let nameValid = user.isNameValid{
+                        if let nameValid = user.isNameValid {
                             if nameValid {
                                 Image(systemName: "checkmark")
                                     .foregroundColor(.green)
@@ -39,7 +39,7 @@ struct LoginView: View {
                     }
                     HStack {
                         PasswordTextView(name: $user.password, isValid: $user.isPasswordValid, showPassword: $showPassword)
-                        if let passwordValid = user.isPasswordValid{
+                        if let passwordValid = user.isPasswordValid {
                             if passwordValid {
                                 Image(systemName: "checkmark")
                                     .foregroundColor(.green)
@@ -51,10 +51,10 @@ struct LoginView: View {
                             }
                         }
                     }
-                    HStack{
-                        Button(action:{withAnimation{
+                    HStack {
+                        Button(action: { withAnimation {
                             showSheet.toggle()
-                        }}){
+                        }}) {
                             Text("Forgot Password ?")
                                 .font(.subheadline).bold()
                         }
@@ -64,20 +64,21 @@ struct LoginView: View {
                     Button(action: {
                         user.validateName(name: user.login)
                         user.validatePassword(name: user.password)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
-                            if user.isNameValid == true &&
-                                user.isPasswordValid == true {
-                                withAnimation{
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            if user.isNameValid == true,
+                               user.isPasswordValid == true
+                            {
+                                withAnimation {
                                     user.loadUser()
                                 }
                             } else {
-                                withAnimation{
+                                withAnimation {
                                     user.isNameValid = nil
                                     user.isPasswordValid = nil
                                 }
                             }
                         }
-                    }){
+                    }) {
                         Text("Sign In")
                             .foregroundColor(.darkText)
                             .font(.headline)
@@ -86,9 +87,9 @@ struct LoginView: View {
                             .cornerRadius(16)
                             .shadow(color: .darkText.opacity(0.2), radius: 2, x: 1.0, y: 2)
                     }
-                    Button(action:{withAnimation{
+                    Button(action: { withAnimation {
                         showSheet.toggle()
-                    }}){
+                    }}) {
                         Text("Create an account").font(.headline)
                             .foregroundColor(.darkText)
                             .shadow(color: .darkText.opacity(0.1), radius: 2, x: 1, y: 2)
@@ -99,10 +100,21 @@ struct LoginView: View {
                 .cornerRadius(16)
                 Spacer()
             }.padding()
-            .sheet(isPresented: $showSheet){
-                Text("Create an account or forgot password")
-            }
+                .sheet(isPresented: $showSheet) {
+                    Text("Create an account or forgot password")
+                }.onTapGesture {
+                    showSheet = false
+                }
         }
+    }
+}
+
+struct SheetView: View {
+    var body: some View {
+        Text("Create an account or forgot password")
+            .padding()
+            .background(Color.white)
+            .cornerRadius(10)
     }
 }
 
@@ -110,16 +122,15 @@ struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
             .environmentObject(UserViewModel())
-        
     }
 }
 
-struct LoginTextView: View{
+struct LoginTextView: View {
     @Binding var name: String
     @Binding var isValid: Bool?
     var body: some View {
         HStack {
-            TextField("Username",text: $name)
+            TextField("Username", text: $name)
                 .padding()
                 .background(Color.background)
                 .cornerRadius(16)
@@ -128,37 +139,36 @@ struct LoginTextView: View{
                 .autocapitalization(.none)
         }
     }
-
 }
 
-struct PasswordTextView: View{
+struct PasswordTextView: View {
     @Binding var name: String
     @Binding var isValid: Bool?
     @Binding var showPassword: Bool
     var body: some View {
-        Group{
-            if !showPassword{
+        Group {
+            if !showPassword {
                 HStack {
-                    SecureField("Password",text: $name)
+                    SecureField("Password", text: $name)
                         .padding()
                         .background(Color.background)
                         .cornerRadius(16)
                         .shadow(color: .borderColor(condition: isValid), radius: 2, x: 0.0, y: 0.0)
                         .disableAutocorrection(true)
                         .autocapitalization(.none)
-                    Button(action:{
-                        withAnimation{
+                    Button(action: {
+                        withAnimation {
                             showPassword.toggle()
                         }
-                    }){
+                    }) {
                         Image(systemName: "eye")
                             .imageScale(.large)
                     }
                 }
             } else {
                 HStack {
-                    LoginTextView(name: $name,isValid: $isValid)
-                    Button(action:{showPassword.toggle()}){
+                    LoginTextView(name: $name, isValid: $isValid)
+                    Button(action: { showPassword.toggle() }) {
                         Image(systemName: "eye.slash")
                             .imageScale(.large)
                     }

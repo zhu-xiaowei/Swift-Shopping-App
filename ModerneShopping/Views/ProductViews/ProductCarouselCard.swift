@@ -5,36 +5,54 @@
 //  Created by Djallil Elkebir on 2021-09-08.
 //
 
+import Clickstream
 import SwiftUI
 
 struct ProductCarouselCard: View {
     let product: Product
     var body: some View {
-        ZStack{
-            HStack {
-                ProductCarouselImage(imageURL: product.imageURL)
-                VStack(alignment: .leading){
-                    Text(product.title)
-                        .font(.subheadline)
-                        .lineLimit(3)
-                    Text("\(product.price.format(f: ".2"))$")
-                        .bold()
-                        .padding(4)
-                    HStack(spacing: 2) {
-                        Text("\(product.formatedRating)")
-                            .font(.footnote)
-                        Text("(\(product.rating.manualCount))")
-                            .font(.caption)
-                            .offset(y:2)
+        GeometryReader { geometry in
+            ZStack {
+                HStack {
+                    ProductCarouselImage(imageURL: product.imageURL)
+                    VStack(alignment: .leading) {
+                        Text(product.title)
+                            .font(.subheadline)
+                            .lineLimit(3)
+                        Text("\(product.price.format(f: ".2"))$")
+                            .bold()
+                            .padding(4)
+                        HStack(spacing: 2) {
+                            Text("\(product.formatedRating)")
+                                .font(.footnote)
+                            Text("(\(product.rating.manualCount))")
+                                .font(.caption)
+                                .offset(y: 2)
+                        }
+                    }.foregroundColor(.darkText)
+                    Spacer()
+                }
+                Color.secondaryBackground
+                    .blendMode(.overlay)
+            }.frame(height: 140)
+                .cornerRadius(18)
+                .shadow(color: .darkText.opacity(0.1), radius: 4, x: 1, y: 2).onAppear {
+                    if !isViewCovered(in: geometry) {
+                        let attributes: ClickstreamAttribute = [
+                            "product_id": product.id,
+                            "product_title": product.title,
+                            "product_price": product.price,
+                            "product_category": product.category,
+                        ]
+                        ClickstreamAnalytics.recordEvent(eventName: "product_exposure", attributes: attributes)
                     }
-                }.foregroundColor(.darkText)
-                Spacer()
-            }
-            Color.secondaryBackground
-                .blendMode(.overlay)
-        }.frame(height: 140)
-        .cornerRadius(18)
-        .shadow(color: .darkText.opacity(0.1), radius: 4, x: 1, y: 2)
+                }
+        }
+    }
+
+    func isViewCovered(in geometry: GeometryProxy) -> Bool {
+        let viewFrame = geometry.frame(in: .global)
+        return viewFrame.origin.y < 0 || ProductView.isShow
     }
 }
 
@@ -48,7 +66,7 @@ struct ProductCarouselImage: View {
     @StateObject private var imageLoader = ImageLoader()
     let imageURL: URL
     var body: some View {
-        ZStack{
+        ZStack {
             Rectangle()
                 .fill(Color.white)
                 .frame(width: 100, height: 140, alignment: .center)

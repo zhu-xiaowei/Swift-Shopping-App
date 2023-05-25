@@ -19,17 +19,18 @@ struct ProductCarousel: View {
         UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(Color.darkText)
         UIPageControl.appearance().pageIndicatorTintColor = UIColor(Color.secondaryBackground)
     }
+
     var body: some View {
-        VStack(spacing:0) {
-            TabView(selection: $currentIndex){
-                ForEach(0..<products.count, id: \.self){index in
-                    Button(action:{
-                        withAnimation{
+        VStack(spacing: 0) {
+            TabView(selection: $currentIndex) {
+                ForEach(0 ..< products.count, id: \.self) { index in
+                    Button(action: {
+                        withAnimation {
                             self.product = products[index]
                         }
-                    }){
+                    }) {
                         ProductCarouselCard(product: products[index])
-                            .frame(width: (screenSize.width - 24))
+                            .frame(width: screenSize.width - 24)
                             .shadow(color: .darkText.opacity(0.1), radius: 3, x: 1, y: 2)
                     }
                     .tag(index)
@@ -37,22 +38,23 @@ struct ProductCarousel: View {
             }
             .frame(height: 220)
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-            .sheet(item: $product){product in
+            .sheet(item: $product) { product in
                 ProductView(product: product).environmentObject(cart)
             }
-            .onReceive(timer) { input in
+            .onReceive(timer) { _ in
                 animateCarousel()
             }
         }
     }
-    func animateCarousel(){
+
+    func animateCarousel() {
         if currentIndex <= 3 {
-            withAnimation{
-            currentIndex += 1
+            withAnimation {
+                currentIndex += 1
             }
         } else {
-            withAnimation{
-            currentIndex = 0
+            withAnimation {
+                currentIndex = 0
             }
         }
     }
@@ -63,4 +65,3 @@ struct ProductCarousel_Previews: PreviewProvider {
         ProductCarousel(products: Product.sampleProducts)
     }
 }
-

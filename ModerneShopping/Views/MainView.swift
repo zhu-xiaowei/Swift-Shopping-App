@@ -19,7 +19,7 @@ struct MainView: View {
                     Image(systemName: "house")
                     Text("Home")
                 }.onAppear {
-                    ClickstreamAnalytics.recordEvent(eventName: "home_view_appear")
+                    ClickstreamAnalytics.recordEvent(eventName: "view_home")
                 }
             CartView(cartProducts: cartItems)
                 .environmentObject(user)
@@ -27,15 +27,15 @@ struct MainView: View {
                     Image(systemName: "cart")
                     Text("Cart")
                 }.onAppear {
-                    ClickstreamAnalytics.recordEvent(eventName: "cart_view_appear")
+                    ClickstreamAnalytics.recordEvent(eventName: "view_cart")
                 }
             ProfilView()
                 .environmentObject(user)
                 .tabItem {
                     Image(systemName: "person")
-                    Text("Profil")
+                    Text("Profile")
                 }.onAppear {
-                    ClickstreamAnalytics.recordEvent(eventName: "profile_view_appear")
+                    ClickstreamAnalytics.recordEvent(eventName: "view_profile")
                 }
         }
         .zIndex(10)

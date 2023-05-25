@@ -46,7 +46,7 @@ class APIServices: APIServicesProtocol {
 /// Diffrent product and the api endpoint
 enum ProductListEndpoint: String, CaseIterable {
     
-    case all = "All"
+    case all = " All  "
     case jewelery = "Jewelery"
     case electronics = "electronics"
     case men = "men's clothing"

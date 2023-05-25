@@ -5,15 +5,17 @@
 //  Created by Djallil Elkebir on 2021-09-07.
 //
 
+import Clickstream
 import SwiftUI
 
 struct CheckOutView: View {
     @EnvironmentObject var cart: CartViewModel
     let products: [Product]
-    let price:Double
+    let price: Double
     var taxes: Double {
-        (price * 20 / 100)
+        price * 20 / 100
     }
+
     var delivery: Double {
         if price > 100 {
             return 0
@@ -21,25 +23,26 @@ struct CheckOutView: View {
             return 50
         }
     }
+
     var body: some View {
         VStack {
             Spacer()
-            ZStack{
+            ZStack {
                 Color.background.edgesIgnoringSafeArea(.bottom)
                 Color.secondaryBackground.opacity(0.3).edgesIgnoringSafeArea(.bottom)
-                VStack(alignment:.center, spacing: 0){
-                    HStack{
-                        Button(action: {withAnimation{cart.showShowcaseSheet.toggle()}}, label: {
+                VStack(alignment: .center, spacing: 0) {
+                    HStack {
+                        Button(action: { withAnimation { cart.showShowcaseSheet.toggle() }}, label: {
                             Image(systemName: "xmark")
                                 .imageScale(.medium)
                                 .foregroundColor(.darkText)
                         }).padding(8)
-                        .background(Color.secondaryBackground)
-                        .clipShape(Circle())
+                            .background(Color.secondaryBackground)
+                            .clipShape(Circle())
                         Spacer()
                     }.padding()
                     Spacer()
-                    ForEach(products){product in
+                    ForEach(products) { product in
                         HStack {
                             Text(product.title)
                                 .font(.caption)
@@ -47,11 +50,11 @@ struct CheckOutView: View {
                             Text("\(product.price.format(f: ".2"))$").bold()
                             Spacer()
                         }.padding(.horizontal)
-                        .foregroundColor(.darkText)
-                        .background(Color.background)
-                        .padding(.horizontal)
+                            .foregroundColor(.darkText)
+                            .background(Color.background)
+                            .padding(.horizontal)
                     }
-                    
+
                     Text("Taxes: \(taxes.format(f: ".02"))$")
                         .font(.caption)
                         .padding(.top)
@@ -59,7 +62,14 @@ struct CheckOutView: View {
                         .font(.caption)
                     Text("Final Price: \((price + taxes + delivery).format(f: ".02"))$")
                         .font(.caption)
-                    Button(action: {print("Paying ...")}) {
+                    Button(action: {
+                        print("Paying ...")
+                        let attribute: ClickstreamAttribute = [
+                            "final_price": price,
+                            "product_count": products.count
+                        ]
+                        ClickstreamAnalytics.recordEvent(eventName: "purchase", attributes: attribute)
+                    }) {
                         Text("Click Here to Pay").bold()
                             .padding()
                             .background(Color.secondaryBackground)
@@ -68,7 +78,7 @@ struct CheckOutView: View {
                 }.foregroundColor(.darkText)
                 Spacer()
             }.cornerRadius(12)
-            .frame(height: 300)
+                .frame(height: 300)
         }
         .transition(.move(edge: .bottom))
         .zIndex(20)
@@ -77,6 +87,6 @@ struct CheckOutView: View {
 
 struct CheckOutView_Previews: PreviewProvider {
     static var previews: some View {
-        CheckOutView(products: Array(Product.sampleProducts[0...2]), price: 500)
+        CheckOutView(products: Array(Product.sampleProducts[0 ... 2]), price: 500)
     }
 }
