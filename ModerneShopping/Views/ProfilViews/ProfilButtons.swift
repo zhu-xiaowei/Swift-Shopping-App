@@ -5,20 +5,34 @@
 //  Created by Djallil Elkebir on 2021-09-06.
 //
 
+import Clickstream
 import SwiftUI
 
 struct ProfilButtons: View {
     @EnvironmentObject var user: UserViewModel
+    @State private var isAccountActive = false
+    @State private var isHistoryActive = false
+    @State private var isOrdersActive = false
+
     var body: some View {
         VStack {
             NavigationLink(destination: ZStack {
                 Color.background.edgesIgnoringSafeArea(.all)
-                Text("Update Account")
-            }){
+                Button(action: {
+                    isAccountActive = false
+                }) {
+                    Text("Update Account")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .foregroundColor(.black)
+                }.onAppear {
+                    ClickstreamAnalytics.recordEvent(eventName: "update_account_click")
+                }
+            }, isActive: $isAccountActive) {
                 HStack {
                     Text("Update Account")
                     Image(systemName: "slider.horizontal.3")
-                }.font(.headline)
+                }
+                .font(.headline)
                 .padding()
                 .background(Color.secondaryBackground)
                 .cornerRadius(12)
@@ -26,42 +40,58 @@ struct ProfilButtons: View {
             }
             NavigationLink(destination: ZStack {
                 Color.background.edgesIgnoringSafeArea(.all)
-                Text("History")
-            }){
+                Button(action: {
+                    isHistoryActive = false
+                }) {
+                    Text("History")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .foregroundColor(.black)
+                }.onAppear {
+                    ClickstreamAnalytics.recordEvent(eventName: "history_click")
+                }
+            }, isActive: $isHistoryActive) {
                 HStack {
                     Text("History")
                     Image(systemName: "cart.fill")
                 }.font(.headline)
-                .padding()
-                .background(Color.secondaryBackground)
-                .cornerRadius(12)
-                .shadow(color: .accentColor.opacity(0.1), radius: 2, x: 0.5, y: 1)
+                    .padding()
+                    .background(Color.secondaryBackground)
+                    .cornerRadius(12)
+                    .shadow(color: .accentColor.opacity(0.1), radius: 2, x: 0.5, y: 1)
             }
             NavigationLink(destination: ZStack {
                 Color.background.edgesIgnoringSafeArea(.all)
-                Text("Orders")
-            }){
+                Button(action: {
+                    isOrdersActive = false
+                }) {
+                    Text("Orders")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .foregroundColor(.black)
+                }.onAppear {
+                    ClickstreamAnalytics.recordEvent(eventName: "orders_click")
+                }
+            }, isActive: $isOrdersActive) {
                 HStack {
                     Text("Orders")
                     Image(systemName: "bag.circle")
                 }.font(.headline)
-                .padding()
-                .background(Color.secondaryBackground)
-                .cornerRadius(12)
-                .shadow(color: .accentColor.opacity(0.1), radius: 2, x: 0.5, y: 1)
+                    .padding()
+                    .background(Color.secondaryBackground)
+                    .cornerRadius(12)
+                    .shadow(color: .accentColor.opacity(0.1), radius: 2, x: 0.5, y: 1)
             }
-            Button(action:{withAnimation{user.signout()}}){
+            Button(action: { withAnimation { user.signout() }}) {
                 HStack {
                     Text("Sign out")
                     Image(systemName: "person.crop.circle.fill.badge.xmark")
                 }.font(.headline)
-                .padding()
-                .background(Color.secondaryBackground)
-                .cornerRadius(12)
-                .shadow(color: .accentColor.opacity(0.1), radius: 2, x: 0.5, y: 1)
+                    .padding()
+                    .background(Color.secondaryBackground)
+                    .cornerRadius(12)
+                    .shadow(color: .accentColor.opacity(0.1), radius: 2, x: 0.5, y: 1)
             }
         }.padding()
-        .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitleDisplayMode(.inline)
     }
 }
 

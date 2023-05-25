@@ -101,9 +101,17 @@ struct LoginView: View {
                 Spacer()
             }.padding()
                 .sheet(isPresented: $showSheet) {
-                    Text("Create an account or forgot password")
-                }.onTapGesture {
-                    showSheet = false
+                    
+                    Button(action: {
+                        showSheet = false
+                    }) {
+                        Text("Create an account or forgot password")
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .foregroundColor(.black)
+                    }
+//                    Text("Create an account or forgot password").onTapGesture {
+//                        showSheet = false
+//                    }.frame(height: 800)
                 }
         }
     }
