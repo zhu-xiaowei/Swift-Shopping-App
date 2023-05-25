@@ -4,9 +4,9 @@
   "analytics": {
     "plugins": {
       "awsClickstreamPlugin": {
-        "appId": "ModernShopping",
-        "endpoint": "http://Click-Inges-11BMEQJY1XHH7-177087144.us-east-1.elb.amazonaws.com/collect",
-        "isCompressEvents": true,
+        "appId": "Shopping",
+        "endpoint": "http://Click-Inges-1NLLYC4DH6VFA-68740176.us-east-1.elb.amazonaws.com/collect",
+        "isCompressEvents": false,
         "autoFlushEventsInterval": 10000,
         "isTrackAppExceptionEvents": false
       }
