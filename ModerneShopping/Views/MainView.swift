@@ -5,6 +5,8 @@
 //  Created by Djallil Elkebir on 2021-09-02.
 //
 
+import AdSupport
+import AppTrackingTransparency
 import Clickstream
 import SwiftUI
 
@@ -39,10 +41,24 @@ struct MainView: View {
                 }
         }
         .zIndex(10)
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//                requestIDFAPermission()
+            }
+        }
     }
 
     enum Tab {
         case home, cart, profile
+    }
+
+    func requestIDFAPermission() {
+        if #available(iOS 14, *) {
+            ATTrackingManager.requestTrackingAuthorization { status in
+                let isAuthorized = (status == .authorized)
+                print("isAuthorized: " + String(describing: isAuthorized))
+            }
+        } else {}
     }
 }
 
