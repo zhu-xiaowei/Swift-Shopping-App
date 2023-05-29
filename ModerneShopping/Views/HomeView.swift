@@ -51,8 +51,10 @@ struct HomeView: View {
                         }
                     }
                     .onAppear {
-                        DispatchQueue.main.async {
-                            productsList.loadProducts(with: pickedCategory)
+                        if productsList.products == nil {
+                            DispatchQueue.main.async {
+                                productsList.loadProducts(with: pickedCategory)
+                            }
                         }
                     }
                     Spacer(minLength: 40)

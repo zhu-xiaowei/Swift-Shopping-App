@@ -7,16 +7,17 @@
 
 import Foundation
 
-class  ProductsListObject: ObservableObject {
+class ProductsListObject: ObservableObject {
     @Published var products: [Product]?
+    @Published var AllProducts: [String: [Product]] = [:]
     @Published var isLoading = false
     @Published var error: NSError?
     
-    var featuredProduct : [Product] {
+    var featuredProduct: [Product] {
         var fProducts: [Product] = []
-        if let products = self.products  {
+        if let products {
             if products.count >= 4 {
-            fProducts = products[0...3].shuffled()
+                fProducts = products[0 ... 3].shuffled()
             }
         }
         return fProducts
@@ -25,18 +26,22 @@ class  ProductsListObject: ObservableObject {
     /// Getting the api services singleton
     private let productListServices: APIServicesProtocol
     
-    init(productServices: APIServicesProtocol = APIServices.shared){
+    init(productServices: APIServicesProtocol = APIServices.shared) {
         self.productListServices = productServices
     }
     
     /// Call the api services to get the product needed
     /// - Parameter url: category of products
-    func loadProducts(with url: ProductListEndpoint){
-        self.products = nil
+    func loadProducts(with url: ProductListEndpoint) {
+        if AllProducts[url.description] != nil {
+            products = AllProducts[url.description]
+            return
+        }
+        products = nil
         DispatchQueue.main.async {
             self.isLoading = true
         }
-        productListServices.fetchProducts(from: url) { (result) in
+        productListServices.fetchProducts(from: url) { result in
             DispatchQueue.main.async {
                 self.isLoading = true
             }
@@ -44,6 +49,7 @@ class  ProductsListObject: ObservableObject {
             case .success(let response):
                 DispatchQueue.main.async {
                     self.products = response
+                    self.AllProducts[url.description] = self.products
                     self.isLoading = false
                 }
             case .failure(let error):
