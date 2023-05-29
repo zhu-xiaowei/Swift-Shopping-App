@@ -10,12 +10,12 @@ import Lottie
 
 struct LoginLottieView: UIViewRepresentable {
     
-    var animationView = AnimationView()
+    var animationView = LottieAnimationView()
     
     func makeUIView(context: UIViewRepresentableContext<LoginLottieView>) -> UIView {
         let view = UIView(frame: .zero)
         
-        animationView.animation = Animation.named("shoppingCart")
+        animationView.animation = LottieAnimation.named("shoppingCart")
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .loop
         animationView.play()

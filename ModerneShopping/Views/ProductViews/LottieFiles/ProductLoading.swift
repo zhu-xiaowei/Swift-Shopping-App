@@ -10,12 +10,12 @@ import Lottie
 
 struct ProductLoading: UIViewRepresentable {
     
-    var animationView = AnimationView()
+    var animationView = LottieAnimationView()
     
     func makeUIView(context: UIViewRepresentableContext<ProductLoading>) -> UIView {
         let view = UIView(frame: .zero)
         
-        animationView.animation = Animation.named("productLoading")
+        animationView.animation = LottieAnimation.named("productLoading")
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .loop
         animationView.play()
