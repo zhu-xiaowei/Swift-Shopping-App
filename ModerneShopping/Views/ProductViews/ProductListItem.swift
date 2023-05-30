@@ -5,7 +5,6 @@
 //  Created by Djallil Elkebir on 2021-09-02.
 //
 
-import Clickstream
 import SwiftUI
 
 struct ProductListItem: View {
@@ -29,13 +28,6 @@ struct ProductListItem: View {
                     .offset(y: 3)
             }
         }.padding(8).onAppear {
-            let attributes: ClickstreamAttribute = [
-                "product_id": product.id,
-                "product_title": product.title,
-                "product_price": product.price,
-                "product_category": product.category,
-            ]
-            ClickstreamAnalytics.recordEvent(eventName: "product_exposure", attributes: attributes)
         }
     }
 }

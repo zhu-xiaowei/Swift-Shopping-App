@@ -5,7 +5,6 @@
 //  Created by Djallil Elkebir on 2021-09-08.
 //
 
-import Clickstream
 import SwiftUI
 
 struct ProductCarouselCard: View {
@@ -38,13 +37,6 @@ struct ProductCarouselCard: View {
                 .cornerRadius(18)
                 .shadow(color: .darkText.opacity(0.1), radius: 4, x: 1, y: 2).onAppear {
                     if !isViewCovered(in: geometry) {
-                        let attributes: ClickstreamAttribute = [
-                            "product_id": product.id,
-                            "product_title": product.title,
-                            "product_price": product.price,
-                            "product_category": product.category,
-                        ]
-                        ClickstreamAnalytics.recordEvent(eventName: "product_exposure", attributes: attributes)
                     }
                 }
         }

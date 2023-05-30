@@ -5,7 +5,6 @@
 //  Created by Djallil Elkebir on 2021-09-02.
 //
 
-import Clickstream
 import SwiftUI
 
 struct HomeView: View {
@@ -26,10 +25,6 @@ struct HomeView: View {
                             .padding()
                         CustomPicker(choosenCategory: $pickedCategory)
                             .onChange(of: pickedCategory, perform: { _ in
-                                let attribute: ClickstreamAttribute = [
-                                    "category_name": pickedCategory.rawValue.trim()
-                                ]
-                                ClickstreamAnalytics.recordEvent(eventName: "category_click", attributes: attribute)
                                 DispatchQueue.main.async {
                                     productsList.loadProducts(with: pickedCategory)
                                 }
@@ -62,7 +57,6 @@ struct HomeView: View {
             }.navigationBarTitleDisplayMode(.large)
                 .navigationBarItems(
                     leading: NavigationLink(destination: ProfilView().environmentObject(user).onAppear {
-                        ClickstreamAnalytics.recordEvent(eventName: "home_profile_click")
                     }) {
                         leadingBarItem(user: user.user?.results[0])
                     },
@@ -83,7 +77,6 @@ struct TrailingBarItem: View {
     @EnvironmentObject var cart: CartViewModel
     var body: some View {
         NavigationLink(destination: CartView(cartProducts: cart).onAppear {
-            ClickstreamAnalytics.recordEvent(eventName: "home_cart_click")
         }) {
             Image(systemName: "cart")
                 .foregroundColor(.darkText)

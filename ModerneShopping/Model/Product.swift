@@ -16,16 +16,18 @@ struct Product: Identifiable, Codable, Hashable {
     var image: String
     var rating: Rating
 }
+
 extension Product {
     var imageURL: URL {
         URL(string: image)!
     }
+
     var formatedRating: String {
         var result = ""
-        for _ in 0...Int(rating.rate){
+        for _ in 0 ... Int(rating.rate) {
             result.append("★")
         }
-        while result.count<5{
+        while result.count < 5 {
             result += "☆"
         }
         return result
@@ -36,7 +38,7 @@ struct Rating: Codable, Hashable {
     let rate: Double
     // to remplace with let count when the api bug is fixed https://github.com/keikaavousi/fake-store-api/issues/31
     // let count: Int
-    var manualCount: Int = Int.random(in: 0...500)
+    let manualCount: Int = Int.random(in: 0...500)
 }
 
 extension Product {

@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A10018A2A1DDF4300DF72CB /* Clickstream in Frameworks */ = {isa = PBXBuildFile; productRef = 3A1001892A1DDF4300DF72CB /* Clickstream */; };
 		3A10018C2A1DE16C00DF72CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10018B2A1DE16C00DF72CB /* AppDelegate.swift */; };
-		3A10018E2A1DE2B500DF72CB /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A10018D2A1DE2B500DF72CB /* amplifyconfiguration.json */; };
 		9DACF93326E0297B00AD45B7 /* ModerneShoppingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DACF93226E0297B00AD45B7 /* ModerneShoppingApp.swift */; };
 		9DACF93526E0297B00AD45B7 /* ProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DACF93426E0297B00AD45B7 /* ProductView.swift */; };
 		9DACF93726E0297C00AD45B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DACF93626E0297C00AD45B7 /* Assets.xcassets */; };
@@ -79,7 +77,6 @@
 
 /* Begin PBXFileReference section */
 		3A10018B2A1DE16C00DF72CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3A10018D2A1DE2B500DF72CB /* amplifyconfiguration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		9DACF92F26E0297B00AD45B7 /* ModerneShopping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModerneShopping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DACF93226E0297B00AD45B7 /* ModerneShoppingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModerneShoppingApp.swift; sourceTree = "<group>"; };
 		9DACF93426E0297B00AD45B7 /* ProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductView.swift; sourceTree = "<group>"; };
@@ -140,7 +137,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DACF99C26E6710700AD45B7 /* Lottie in Frameworks */,
-				3A10018A2A1DDF4300DF72CB /* Clickstream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,7 +182,6 @@
 			children = (
 				9DACF93226E0297B00AD45B7 /* ModerneShoppingApp.swift */,
 				3A10018B2A1DE16C00DF72CB /* AppDelegate.swift */,
-				3A10018D2A1DE2B500DF72CB /* amplifyconfiguration.json */,
 				9DACF96526E1CEC500AD45B7 /* Views */,
 				9DACF95826E1C49500AD45B7 /* ViewModel */,
 				9DACF95526E1516300AD45B7 /* Model */,
@@ -367,7 +362,6 @@
 			name = ModerneShopping;
 			packageProductDependencies = (
 				9DACF99B26E6710700AD45B7 /* Lottie */,
-				3A1001892A1DDF4300DF72CB /* Clickstream */,
 			);
 			productName = ModerneShopping;
 			productReference = 9DACF92F26E0297B00AD45B7 /* ModerneShopping.app */;
@@ -442,7 +436,6 @@
 			mainGroup = 9DACF92626E0297B00AD45B7;
 			packageReferences = (
 				9DACF99A26E6710700AD45B7 /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				3A1001882A1DDF4300DF72CB /* XCRemoteSwiftPackageReference "clickstream-swift" */,
 			);
 			productRefGroup = 9DACF93026E0297B00AD45B7 /* Products */;
 			projectDirPath = "";
@@ -463,7 +456,6 @@
 				9DACF94726E02B7F00AD45B7 /* products.json in Resources */,
 				9DACF9AC26E6E88100AD45B7 /* api.json in Resources */,
 				9DACF93A26E0297C00AD45B7 /* Preview Assets.xcassets in Resources */,
-				3A10018E2A1DE2B500DF72CB /* amplifyconfiguration.json in Resources */,
 				9DACF9A526E672C600AD45B7 /* productLoading.json in Resources */,
 				9DACF9C326EA55FE00AD45B7 /* shoppingCart.json in Resources */,
 				9DACF93726E0297C00AD45B7 /* Assets.xcassets in Resources */,
@@ -852,14 +844,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3A1001882A1DDF4300DF72CB /* XCRemoteSwiftPackageReference "clickstream-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/awslabs/clickstream-swift.git";
-			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 0.4.1;
-			};
-		};
 		9DACF99A26E6710700AD45B7 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios";
@@ -871,11 +855,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3A1001892A1DDF4300DF72CB /* Clickstream */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3A1001882A1DDF4300DF72CB /* XCRemoteSwiftPackageReference "clickstream-swift" */;
-			productName = Clickstream;
-		};
 		9DACF99B26E6710700AD45B7 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9DACF99A26E6710700AD45B7 /* XCRemoteSwiftPackageReference "lottie-ios" */;

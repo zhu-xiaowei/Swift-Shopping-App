@@ -5,7 +5,6 @@
 //  Created by Djallil Elkebir on 2021-09-06.
 //
 
-import Clickstream
 import SwiftUI
 
 class UserViewModel: ObservableObject {
@@ -43,16 +42,7 @@ class UserViewModel: ObservableObject {
                     self.user = response
                     self.isLoading = false
                     if let userAPIResults: UserAPIResults = self.user {
-                        let user = userAPIResults.results[0]
-                        ClickstreamAnalytics.setUserId(userId: user.login.uuid)
-                        let userAttribute = [
-                            "_user_name": user.name.first + " " + user.name.last,
-                            "_user_email": user.email,
-                            "_user_gender": user.gender,
-                            "_user_country": user.location.country,
-                            "_user_city": user.location.city
-                        ]
-                        ClickstreamAnalytics.addUserAttributes(attributes: userAttribute)
+                        _ = userAPIResults.results[0]
                     }
                 }
             case .failure(let error):
@@ -74,7 +64,6 @@ class UserViewModel: ObservableObject {
             self.user = nil
             self.isLoading = false
         }
-        ClickstreamAnalytics.setUserId(userId: nil)
     }
 
     /// validate if the username respect our conditions
