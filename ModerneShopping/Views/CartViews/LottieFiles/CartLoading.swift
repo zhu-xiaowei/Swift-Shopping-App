@@ -14,17 +14,17 @@ struct CartLoading: UIViewRepresentable {
     func makeUIView(context: UIViewRepresentableContext<CartLoading>) -> UIView {
         let view = UIView(frame: .zero)
 
-        animationView.animation = LottieAnimation.named("cartloading")
-        animationView.contentMode = .scaleAspectFit
-        animationView.loopMode = .repeat(1)
-        animationView.play { _ in
-            /// Animation stopped
-            animationView.currentProgress = 0.5
-            animationView.pause()
-        }
-        animationView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(animationView)
-        NSLayoutConstraint.activate([animationView.heightAnchor.constraint(equalTo: view.heightAnchor), animationView.widthAnchor.constraint(equalTo: view.widthAnchor)])
+//        animationView.animation = LottieAnimation.named("cartloading")
+//        animationView.contentMode = .scaleAspectFit
+//        animationView.loopMode = .repeat(1)
+//        animationView.play { _ in
+//            /// Animation stopped
+//            animationView.currentProgress = 0.5
+//            animationView.pause()
+//        }
+//        animationView.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(animationView)
+//        NSLayoutConstraint.activate([animationView.heightAnchor.constraint(equalTo: view.heightAnchor), animationView.widthAnchor.constraint(equalTo: view.widthAnchor)])
         return view
     }
 

@@ -43,7 +43,7 @@ struct ProductView: View {
                             .font(.headline)
                         HStack(spacing: 2) {
                             Text("\(product.formatedRating)").font(.title3)
-                            Text("(\(product.rating.manualCount))").font(.caption)
+                            Text("(\(product.rating.count))").font(.caption)
                                 .foregroundColor(.secondary)
                                 .offset(y: 3)
                         }

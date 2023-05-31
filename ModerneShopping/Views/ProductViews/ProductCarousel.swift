@@ -26,7 +26,9 @@ struct ProductCarousel: View {
                 ForEach(0 ..< products.count, id: \.self) { index in
                     Button(action: {
                         withAnimation {
-                            self.product = products[index]
+                            if index < products.count {
+                                self.product = products[index]
+                            }
                         }
                     }) {
                         ProductCarouselCard(product: products[index])

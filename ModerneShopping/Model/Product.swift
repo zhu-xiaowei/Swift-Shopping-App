@@ -36,14 +36,12 @@ extension Product {
 
 struct Rating: Codable, Hashable {
     let rate: Double
-    // to remplace with let count when the api bug is fixed https://github.com/keikaavousi/fake-store-api/issues/31
-    // let count: Int
-    let manualCount: Int = Int.random(in: 0...500)
+    let count: Int
 }
 
 extension Product {
     static var sampleProducts: [Product] {
         let response: [Product]? = try? Bundle.main.loadAndDecodeJSON(filename: "products")
-        return response ?? [Product(id: 1, title: "noproduct", price: 10.5, description: "noproduct", category: "noproduct", image: "noproduct", rating: Rating(rate: 10.0))]
+        return response ?? [Product(id: 1, title: "noproduct", price: 10.5, description: "noproduct", category: "noproduct", image: "noproduct", rating: Rating(rate: 10.0, count: 1))]
     }
 }
