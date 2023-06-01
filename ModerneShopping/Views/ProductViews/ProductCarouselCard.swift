@@ -25,7 +25,7 @@ struct ProductCarouselCard: View {
                         HStack(spacing: 2) {
                             Text("\(product.formatedRating)")
                                 .font(.footnote)
-                            Text("(\(product.rating.manualCount))")
+                            Text("(\(product.rating.count))")
                                 .font(.caption)
                                 .offset(y: 2)
                         }
