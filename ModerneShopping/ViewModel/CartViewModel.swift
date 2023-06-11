@@ -7,6 +7,7 @@
 
 import Clickstream
 import SwiftUI
+import Firebase
 
 class CartViewModel: ObservableObject {
     @Published var cartProduct: [Product] = []
@@ -26,6 +27,7 @@ class CartViewModel: ObservableObject {
             "product_category": addedProduct.category,
         ]
         ClickstreamAnalytics.recordEvent(eventName: "add_to_cart", attributes: attributes)
+        Analytics.logEvent("add_to_cart", parameters: attributes)
 
         let products = cartProductDic.map(\.key)
         // if we don't have any product we just create it with our quantity and leave the func
@@ -74,6 +76,7 @@ class CartViewModel: ObservableObject {
             "product_category": toRemove.category,
         ]
         ClickstreamAnalytics.recordEvent(eventName: "cart_delete", attributes: attributes)
+        Analytics.logEvent("cart_delete", parameters: attributes)
         cartProductDic.removeValue(forKey: toRemove)
     }
 }

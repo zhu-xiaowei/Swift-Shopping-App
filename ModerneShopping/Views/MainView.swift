@@ -8,6 +8,7 @@
 import AdSupport
 import AppTrackingTransparency
 import Clickstream
+import Firebase
 import SwiftUI
 
 struct MainView: View {
@@ -22,6 +23,7 @@ struct MainView: View {
                     Text("Home")
                 }.onAppear {
                     ClickstreamAnalytics.recordEvent(eventName: "view_home")
+                    Analytics.logEvent("view_home", parameters: nil)
                 }
             CartView(cartProducts: cartItems)
                 .environmentObject(user)
@@ -30,6 +32,7 @@ struct MainView: View {
                     Text("Cart")
                 }.onAppear {
                     ClickstreamAnalytics.recordEvent(eventName: "view_cart")
+                    Analytics.logEvent("view_cart", parameters: nil)
                 }
             ProfilView()
                 .environmentObject(user)
@@ -38,6 +41,7 @@ struct MainView: View {
                     Text("Profile")
                 }.onAppear {
                     ClickstreamAnalytics.recordEvent(eventName: "view_profile")
+                    Analytics.logEvent("view_profile", parameters: nil)
                 }
         }
         .zIndex(10)

@@ -7,6 +7,7 @@
 
 import Clickstream
 import SwiftUI
+import Firebase
 
 struct CheckOutView: View {
     @EnvironmentObject var cart: CartViewModel
@@ -69,6 +70,7 @@ struct CheckOutView: View {
                             "product_count": products.count
                         ]
                         ClickstreamAnalytics.recordEvent(eventName: "purchase", attributes: attribute)
+                        Analytics.logEvent("purchase", parameters: attribute)
                     }) {
                         Text("Click Here to Pay").bold()
                             .padding()

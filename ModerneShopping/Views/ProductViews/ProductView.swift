@@ -7,6 +7,7 @@
 
 import Clickstream
 import SwiftUI
+import Firebase
 
 struct ProductView: View {
     @EnvironmentObject var cart: CartViewModel
@@ -88,6 +89,7 @@ struct ProductView: View {
                     "product_category": product.category,
                 ]
                 ClickstreamAnalytics.recordEvent(eventName: "product_click", attributes: attributes)
+                Analytics.logEvent("product_click", parameters: attributes)
                 ProductView.isShow = true
             }.onDisappear{
                 ProductView.isShow = false

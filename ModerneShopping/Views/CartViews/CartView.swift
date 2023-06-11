@@ -7,6 +7,7 @@
 
 import Clickstream
 import SwiftUI
+import Firebase
 
 struct CartView: View {
     @EnvironmentObject var user: UserViewModel
@@ -42,6 +43,7 @@ struct CartView: View {
                 Text("Total: \(cartProducts.totalPrice.format(f: ".2"))$")
                 Button(action: {
                     ClickstreamAnalytics.recordEvent(eventName: "check_out_click")
+                    Analytics.logEvent("check_out_click", parameters: nil)
                     withAnimation { cartProducts.showShowcaseSheet.toggle()
                     }
                 }, label: {
@@ -78,6 +80,7 @@ struct CartView: View {
         Button(action: { withAnimation {
             showDelete.toggle()
             ClickstreamAnalytics.recordEvent(eventName: "cart_show_delete_click")
+            Analytics.logEvent("cart_show_delete_click", parameters: nil)
         }}) {
             Image(systemName: "slider.horizontal.3")
         }.accentColor(.darkText)

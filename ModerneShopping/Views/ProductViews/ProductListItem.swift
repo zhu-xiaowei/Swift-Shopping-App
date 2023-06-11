@@ -7,6 +7,7 @@
 
 import Clickstream
 import SwiftUI
+import Firebase
 
 struct ProductListItem: View {
     let product: Product
@@ -36,6 +37,7 @@ struct ProductListItem: View {
                 "product_category": product.category,
             ]
             ClickstreamAnalytics.recordEvent(eventName: "product_exposure", attributes: attributes)
+            Analytics.logEvent("product_exposure", parameters: attributes)
         }
     }
 }

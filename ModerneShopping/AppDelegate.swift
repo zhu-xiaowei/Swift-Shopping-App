@@ -5,6 +5,7 @@
 //  Created by Zhu, Xiaowei on 2023/5/24.
 //
 import Clickstream
+import FirebaseCore
 import UIKit
 
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -14,10 +15,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             try ClickstreamAnalytics.initSDK()
             let configuration = try ClickstreamAnalytics.getClickstreamConfiguration()
             configuration.isLogEvents = true
+            configuration.isTrackScreenViewEvents = false
         } catch {
             print("Failed to initialize ClickstreamAnalytics with \(error)")
         }
-
+        FirebaseApp.configure()
         return true
     }
 }

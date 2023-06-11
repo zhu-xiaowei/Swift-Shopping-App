@@ -6,6 +6,7 @@
 //
 
 import Clickstream
+import Firebase
 import SwiftUI
 
 struct HomeView: View {
@@ -26,10 +27,11 @@ struct HomeView: View {
                             .padding()
                         CustomPicker(choosenCategory: $pickedCategory)
                             .onChange(of: pickedCategory, perform: { _ in
-                                let attribute: ClickstreamAttribute = [
+                                let attribute = [
                                     "category_name": pickedCategory.rawValue.trim()
                                 ]
                                 ClickstreamAnalytics.recordEvent(eventName: "category_click", attributes: attribute)
+                                Analytics.logEvent("category_click", parameters: attribute)
                                 DispatchQueue.main.async {
                                     productsList.loadProducts(with: pickedCategory)
                                 }
@@ -63,6 +65,7 @@ struct HomeView: View {
                 .navigationBarItems(
                     leading: NavigationLink(destination: ProfilView().environmentObject(user).onAppear {
                         ClickstreamAnalytics.recordEvent(eventName: "home_profile_click")
+                        Analytics.logEvent("home_profile_click", parameters: nil)
                     }) {
                         leadingBarItem(user: user.user?.results[0])
                     },
@@ -84,6 +87,7 @@ struct TrailingBarItem: View {
     var body: some View {
         NavigationLink(destination: CartView(cartProducts: cart).onAppear {
             ClickstreamAnalytics.recordEvent(eventName: "home_cart_click")
+            Analytics.logEvent("home_cart_click", parameters: nil)
         }) {
             Image(systemName: "cart")
                 .foregroundColor(.darkText)

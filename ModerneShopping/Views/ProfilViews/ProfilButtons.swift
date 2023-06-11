@@ -7,6 +7,7 @@
 
 import Clickstream
 import SwiftUI
+import Firebase
 
 struct ProfilButtons: View {
     @EnvironmentObject var user: UserViewModel
@@ -26,6 +27,7 @@ struct ProfilButtons: View {
                         .foregroundColor(.black)
                 }.onAppear {
                     ClickstreamAnalytics.recordEvent(eventName: "update_account_click")
+                    Analytics.logEvent("update_account_click", parameters: nil)
                 }
             }, isActive: $isAccountActive) {
                 HStack {
@@ -48,6 +50,7 @@ struct ProfilButtons: View {
                         .foregroundColor(.black)
                 }.onAppear {
                     ClickstreamAnalytics.recordEvent(eventName: "history_click")
+                    Analytics.logEvent("history_click", parameters: nil)
                 }
             }, isActive: $isHistoryActive) {
                 HStack {
@@ -69,6 +72,7 @@ struct ProfilButtons: View {
                         .foregroundColor(.black)
                 }.onAppear {
                     ClickstreamAnalytics.recordEvent(eventName: "orders_click")
+                    Analytics.logEvent("orders_click", parameters: nil)
                 }
             }, isActive: $isOrdersActive) {
                 HStack {

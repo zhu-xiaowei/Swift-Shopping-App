@@ -6,6 +6,7 @@
 //
 
 import Clickstream
+import Firebase
 import SwiftUI
 
 class UserViewModel: ObservableObject {
@@ -53,6 +54,15 @@ class UserViewModel: ObservableObject {
                             "_user_city": user.location.city
                         ]
                         ClickstreamAnalytics.addUserAttributes(attributes: userAttribute)
+                        ClickstreamAnalytics.recordEvent(eventName: "user_login")
+
+                        Analytics.setUserID(user.login.uuid)
+                        Analytics.setUserProperty(user.name.first + " " + user.name.last, forName: "_user_name")
+                        Analytics.setUserProperty(user.email, forName: "_user_email")
+                        Analytics.setUserProperty(user.gender, forName: "_user_gender")
+                        Analytics.setUserProperty(user.location.country, forName: "_user_country")
+                        Analytics.setUserProperty(user.location.city, forName: "_user_city")
+                        Analytics.logEvent("user_login", parameters: nil)
                     }
                 }
             case .failure(let error):
@@ -75,6 +85,7 @@ class UserViewModel: ObservableObject {
             self.isLoading = false
         }
         ClickstreamAnalytics.setUserId(userId: nil)
+        Analytics.setUserID(nil)
     }
 
     /// validate if the username respect our conditions
