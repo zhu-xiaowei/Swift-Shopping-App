@@ -38,6 +38,7 @@ struct ProductListItem: View {
             ]
             ClickstreamAnalytics.recordEvent(eventName: "product_exposure", attributes: attributes)
             Analytics.logEvent("product_exposure", parameters: attributes)
+            AppDelegate.addEvent()
         }
     }
 }

@@ -69,6 +69,7 @@ struct HeaderLoggedInView: View {
                     .font(.caption)
                     .foregroundColor(.secondary)
                 Text("\(user.location.city)")
+                Text("All event number: \(AppDelegate.allEventNumber)")
             }
             Spacer()
         }.padding()

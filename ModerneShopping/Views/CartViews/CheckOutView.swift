@@ -71,6 +71,7 @@ struct CheckOutView: View {
                         ]
                         ClickstreamAnalytics.recordEvent(eventName: "purchase", attributes: attribute)
                         Analytics.logEvent("purchase", parameters: attribute)
+                        AppDelegate.addEvent()
                     }) {
                         Text("Click Here to Pay").bold()
                             .padding()

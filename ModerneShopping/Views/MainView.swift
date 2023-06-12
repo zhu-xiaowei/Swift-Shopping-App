@@ -24,6 +24,7 @@ struct MainView: View {
                 }.onAppear {
                     ClickstreamAnalytics.recordEvent(eventName: "view_home")
                     Analytics.logEvent("view_home", parameters: nil)
+                    AppDelegate.addEvent()
                 }
             CartView(cartProducts: cartItems)
                 .environmentObject(user)
@@ -33,6 +34,7 @@ struct MainView: View {
                 }.onAppear {
                     ClickstreamAnalytics.recordEvent(eventName: "view_cart")
                     Analytics.logEvent("view_cart", parameters: nil)
+                    AppDelegate.addEvent()
                 }
             ProfilView()
                 .environmentObject(user)
@@ -42,6 +44,7 @@ struct MainView: View {
                 }.onAppear {
                     ClickstreamAnalytics.recordEvent(eventName: "view_profile")
                     Analytics.logEvent("view_profile", parameters: nil)
+                    AppDelegate.addEvent()
                 }
         }
         .zIndex(10)

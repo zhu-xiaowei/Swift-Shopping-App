@@ -28,6 +28,7 @@ struct ProfilButtons: View {
                 }.onAppear {
                     ClickstreamAnalytics.recordEvent(eventName: "update_account_click")
                     Analytics.logEvent("update_account_click", parameters: nil)
+                    AppDelegate.addEvent()
                 }
             }, isActive: $isAccountActive) {
                 HStack {
@@ -51,6 +52,7 @@ struct ProfilButtons: View {
                 }.onAppear {
                     ClickstreamAnalytics.recordEvent(eventName: "history_click")
                     Analytics.logEvent("history_click", parameters: nil)
+                    AppDelegate.addEvent()
                 }
             }, isActive: $isHistoryActive) {
                 HStack {
@@ -73,6 +75,7 @@ struct ProfilButtons: View {
                 }.onAppear {
                     ClickstreamAnalytics.recordEvent(eventName: "orders_click")
                     Analytics.logEvent("orders_click", parameters: nil)
+                    AppDelegate.addEvent()
                 }
             }, isActive: $isOrdersActive) {
                 HStack {

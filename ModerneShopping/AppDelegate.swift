@@ -9,7 +9,9 @@ import FirebaseCore
 import UIKit
 
 class AppDelegate: NSObject, UIApplicationDelegate {
+    public static var allEventNumber: Int = 0
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        AppDelegate.allEventNumber = UserDefaults.standard.integer(forKey: "allEventNumber")
         // init clickstream sdk
         do {
             try ClickstreamAnalytics.initSDK()
@@ -21,5 +23,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         }
         FirebaseApp.configure()
         return true
+    }
+
+    public static func addEvent() {
+        AppDelegate.allEventNumber += 1
+        UserDefaults.standard.set(AppDelegate.allEventNumber, forKey: "allEventNumber")
     }
 }

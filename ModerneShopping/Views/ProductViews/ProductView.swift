@@ -90,6 +90,7 @@ struct ProductView: View {
                 ]
                 ClickstreamAnalytics.recordEvent(eventName: "product_click", attributes: attributes)
                 Analytics.logEvent("product_click", parameters: attributes)
+                AppDelegate.addEvent()
                 ProductView.isShow = true
             }.onDisappear{
                 ProductView.isShow = false

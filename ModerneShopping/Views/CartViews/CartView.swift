@@ -44,6 +44,7 @@ struct CartView: View {
                 Button(action: {
                     ClickstreamAnalytics.recordEvent(eventName: "check_out_click")
                     Analytics.logEvent("check_out_click", parameters: nil)
+                    AppDelegate.addEvent()
                     withAnimation { cartProducts.showShowcaseSheet.toggle()
                     }
                 }, label: {
@@ -81,6 +82,7 @@ struct CartView: View {
             showDelete.toggle()
             ClickstreamAnalytics.recordEvent(eventName: "cart_show_delete_click")
             Analytics.logEvent("cart_show_delete_click", parameters: nil)
+            AppDelegate.addEvent()
         }}) {
             Image(systemName: "slider.horizontal.3")
         }.accentColor(.darkText)

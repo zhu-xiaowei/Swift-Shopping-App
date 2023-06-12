@@ -32,6 +32,7 @@ struct HomeView: View {
                                 ]
                                 ClickstreamAnalytics.recordEvent(eventName: "category_click", attributes: attribute)
                                 Analytics.logEvent("category_click", parameters: attribute)
+                                AppDelegate.addEvent()
                                 DispatchQueue.main.async {
                                     productsList.loadProducts(with: pickedCategory)
                                 }
@@ -66,6 +67,7 @@ struct HomeView: View {
                     leading: NavigationLink(destination: ProfilView().environmentObject(user).onAppear {
                         ClickstreamAnalytics.recordEvent(eventName: "home_profile_click")
                         Analytics.logEvent("home_profile_click", parameters: nil)
+                        AppDelegate.addEvent()
                     }) {
                         leadingBarItem(user: user.user?.results[0])
                     },
@@ -88,6 +90,7 @@ struct TrailingBarItem: View {
         NavigationLink(destination: CartView(cartProducts: cart).onAppear {
             ClickstreamAnalytics.recordEvent(eventName: "home_cart_click")
             Analytics.logEvent("home_cart_click", parameters: nil)
+            AppDelegate.addEvent()
         }) {
             Image(systemName: "cart")
                 .foregroundColor(.darkText)

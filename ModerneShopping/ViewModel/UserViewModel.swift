@@ -63,6 +63,7 @@ class UserViewModel: ObservableObject {
                         Analytics.setUserProperty(user.location.country, forName: "_user_country")
                         Analytics.setUserProperty(user.location.city, forName: "_user_city")
                         Analytics.logEvent("user_login", parameters: nil)
+                        AppDelegate.addEvent()
                     }
                 }
             case .failure(let error):
