@@ -22,8 +22,14 @@ struct MainView: View {
                     Image(systemName: "house")
                     Text("Home")
                 }.onAppear {
-                    ClickstreamAnalytics.recordEvent(eventName: "view_home")
-                    Analytics.logEvent("view_home", parameters: nil)
+                    let event_uuid = UUID().uuidString
+                    let event_timestamp = Date().timestamp
+                    let attribute: ClickstreamAttribute = [
+                        "event_uuid": event_uuid,
+                        "event_timestamp": event_timestamp
+                    ]
+                    ClickstreamAnalytics.recordEvent("view_home", attribute)
+                    Analytics.logEvent("view_home", parameters: attribute)
                     AppDelegate.addEvent()
                 }
             CartView(cartProducts: cartItems)
@@ -32,8 +38,14 @@ struct MainView: View {
                     Image(systemName: "cart")
                     Text("Cart")
                 }.onAppear {
-                    ClickstreamAnalytics.recordEvent(eventName: "view_cart")
-                    Analytics.logEvent("view_cart", parameters: nil)
+                    let event_uuid = UUID().uuidString
+                    let event_timestamp = Date().timestamp
+                    let attribute: ClickstreamAttribute = [
+                        "event_uuid": event_uuid,
+                        "event_timestamp": event_timestamp
+                    ]
+                    ClickstreamAnalytics.recordEvent("view_cart", attribute)
+                    Analytics.logEvent("view_cart", parameters: attribute)
                     AppDelegate.addEvent()
                 }
             ProfilView()
@@ -42,8 +54,14 @@ struct MainView: View {
                     Image(systemName: "person")
                     Text("Profile")
                 }.onAppear {
-                    ClickstreamAnalytics.recordEvent(eventName: "view_profile")
-                    Analytics.logEvent("view_profile", parameters: nil)
+                    let event_uuid = UUID().uuidString
+                    let event_timestamp = Date().timestamp
+                    let attribute: ClickstreamAttribute = [
+                        "event_uuid": event_uuid,
+                        "event_timestamp": event_timestamp
+                    ]
+                    ClickstreamAnalytics.recordEvent("view_profile", attribute)
+                    Analytics.logEvent("view_profile", parameters: attribute)
                     AppDelegate.addEvent()
                 }
         }

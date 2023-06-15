@@ -6,8 +6,8 @@
 //
 
 import Clickstream
-import SwiftUI
 import Firebase
+import SwiftUI
 
 struct ProductListItem: View {
     let product: Product
@@ -30,13 +30,17 @@ struct ProductListItem: View {
                     .offset(y: 3)
             }
         }.padding(8).onAppear {
+            let event_uuid = UUID().uuidString
+            let event_timestamp = Date().timestamp
             let attributes: ClickstreamAttribute = [
                 "product_id": product.id,
                 "product_title": product.title,
                 "product_price": product.price,
                 "product_category": product.category,
+                "event_uuid": event_uuid,
+                "event_timestamp": event_timestamp
             ]
-            ClickstreamAnalytics.recordEvent(eventName: "product_exposure", attributes: attributes)
+            ClickstreamAnalytics.recordEvent("product_exposure", attributes)
             Analytics.logEvent("product_exposure", parameters: attributes)
             AppDelegate.addEvent()
         }

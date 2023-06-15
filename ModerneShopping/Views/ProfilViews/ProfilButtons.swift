@@ -6,8 +6,8 @@
 //
 
 import Clickstream
-import SwiftUI
 import Firebase
+import SwiftUI
 
 struct ProfilButtons: View {
     @EnvironmentObject var user: UserViewModel
@@ -26,8 +26,14 @@ struct ProfilButtons: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .foregroundColor(.black)
                 }.onAppear {
-                    ClickstreamAnalytics.recordEvent(eventName: "update_account_click")
-                    Analytics.logEvent("update_account_click", parameters: nil)
+                    let event_uuid = UUID().uuidString
+                    let event_timestamp = Date().timestamp
+                    let attribute: ClickstreamAttribute = [
+                        "event_uuid": event_uuid,
+                        "event_timestamp": event_timestamp
+                    ]
+                    ClickstreamAnalytics.recordEvent("update_account_click", attribute)
+                    Analytics.logEvent("update_account_click", parameters: attribute)
                     AppDelegate.addEvent()
                 }
             }, isActive: $isAccountActive) {
@@ -50,8 +56,14 @@ struct ProfilButtons: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .foregroundColor(.black)
                 }.onAppear {
-                    ClickstreamAnalytics.recordEvent(eventName: "history_click")
-                    Analytics.logEvent("history_click", parameters: nil)
+                    let event_uuid = UUID().uuidString
+                    let event_timestamp = Date().timestamp
+                    let attribute: ClickstreamAttribute = [
+                        "event_uuid": event_uuid,
+                        "event_timestamp": event_timestamp
+                    ]
+                    ClickstreamAnalytics.recordEvent("history_click", attribute)
+                    Analytics.logEvent("history_click", parameters: attribute)
                     AppDelegate.addEvent()
                 }
             }, isActive: $isHistoryActive) {
@@ -73,8 +85,14 @@ struct ProfilButtons: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .foregroundColor(.black)
                 }.onAppear {
-                    ClickstreamAnalytics.recordEvent(eventName: "orders_click")
-                    Analytics.logEvent("orders_click", parameters: nil)
+                    let event_uuid = UUID().uuidString
+                    let event_timestamp = Date().timestamp
+                    let attribute: ClickstreamAttribute = [
+                        "event_uuid": event_uuid,
+                        "event_timestamp": event_timestamp
+                    ]
+                    ClickstreamAnalytics.recordEvent("orders_click", attribute)
+                    Analytics.logEvent("orders_click", parameters: attribute)
                     AppDelegate.addEvent()
                 }
             }, isActive: $isOrdersActive) {

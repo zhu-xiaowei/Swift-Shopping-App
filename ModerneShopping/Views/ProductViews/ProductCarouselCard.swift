@@ -6,8 +6,8 @@
 //
 
 import Clickstream
-import SwiftUI
 import Firebase
+import SwiftUI
 
 struct ProductCarouselCard: View {
     let product: Product
@@ -39,13 +39,17 @@ struct ProductCarouselCard: View {
                 .cornerRadius(18)
                 .shadow(color: .darkText.opacity(0.1), radius: 4, x: 1, y: 2).onAppear {
                     if !isViewCovered(in: geometry) {
+                        let event_uuid = UUID().uuidString
+                        let event_timestamp = Date().timestamp
                         let attributes: ClickstreamAttribute = [
                             "product_id": product.id,
                             "product_title": product.title,
                             "product_price": product.price,
                             "product_category": product.category,
+                            "event_uuid": event_uuid,
+                            "event_timestamp": event_timestamp
                         ]
-                        ClickstreamAnalytics.recordEvent(eventName: "product_exposure", attributes: attributes)
+                        ClickstreamAnalytics.recordEvent("product_exposure", attributes)
                         Analytics.logEvent("product_exposure", parameters: attributes)
                         AppDelegate.addEvent()
                     }

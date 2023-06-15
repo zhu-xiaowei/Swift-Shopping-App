@@ -6,8 +6,8 @@
 //
 
 import Clickstream
-import SwiftUI
 import Firebase
+import SwiftUI
 
 struct ProductView: View {
     @EnvironmentObject var cart: CartViewModel
@@ -70,7 +70,7 @@ struct ProductView: View {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                 presentation.wrappedValue.dismiss()
                             }
-                            
+
                         }) {
                             HStack {
                                 Text("Add to cart").bold()
@@ -82,17 +82,21 @@ struct ProductView: View {
             }
         }.navigationBarTitleDisplayMode(.large)
             .onAppear {
+                let event_uuid = UUID().uuidString
+                let event_timestamp = Date().timestamp
                 let attributes: ClickstreamAttribute = [
                     "product_id": product.id,
                     "product_title": product.title,
                     "product_price": product.price,
                     "product_category": product.category,
+                    "event_uuid": event_uuid,
+                    "event_timestamp": event_timestamp
                 ]
-                ClickstreamAnalytics.recordEvent(eventName: "product_click", attributes: attributes)
+                ClickstreamAnalytics.recordEvent("product_click", attributes)
                 Analytics.logEvent("product_click", parameters: attributes)
                 AppDelegate.addEvent()
                 ProductView.isShow = true
-            }.onDisappear{
+            }.onDisappear {
                 ProductView.isShow = false
             }
         // ajouter un navigation view vers le cart

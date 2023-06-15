@@ -6,8 +6,8 @@
 //
 
 import Clickstream
-import SwiftUI
 import Firebase
+import SwiftUI
 
 struct CheckOutView: View {
     @EnvironmentObject var cart: CartViewModel
@@ -65,11 +65,15 @@ struct CheckOutView: View {
                         .font(.caption)
                     Button(action: {
                         print("Paying ...")
+                        let event_uuid = UUID().uuidString
+                        let event_timestamp = Date().timestamp
                         let attribute: ClickstreamAttribute = [
                             "final_price": price,
-                            "product_count": products.count
+                            "product_count": products.count,
+                            "event_uuid": event_uuid,
+                            "event_timestamp": event_timestamp
                         ]
-                        ClickstreamAnalytics.recordEvent(eventName: "purchase", attributes: attribute)
+                        ClickstreamAnalytics.recordEvent("purchase", attribute)
                         Analytics.logEvent("purchase", parameters: attribute)
                         AppDelegate.addEvent()
                     }) {

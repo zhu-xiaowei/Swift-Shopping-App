@@ -30,3 +30,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         UserDefaults.standard.set(AppDelegate.allEventNumber, forKey: "allEventNumber")
     }
 }
+
+extension Date {
+    typealias Timestamp = Int64
+
+    var timestamp: Int64 {
+        Int64(timeIntervalSince1970 * 1_000)
+    }
+}
