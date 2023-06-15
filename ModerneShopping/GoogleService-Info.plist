@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>406109657730-b2pc3s2kasii5s05octs9812184q79fq.apps.googleusercontent.com</string>
+	<string>1031092888428-lhv2mp1sk2idpnficnl5flosaaan95n4.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.406109657730-b2pc3s2kasii5s05octs9812184q79fq</string>
+	<string>com.googleusercontent.apps.1031092888428-lhv2mp1sk2idpnficnl5flosaaan95n4</string>
 	<key>API_KEY</key>
-	<string>AIzaSyC4_2cTiytrKukbAMwpN5m3XPaHyAg7AmU</string>
+	<string>AIzaSyBiVBnEPqXDQeur_KR98BS9mNYDczRnp_w</string>
 	<key>GCM_SENDER_ID</key>
-	<string>406109657730</string>
+	<string>1031092888428</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>software.aws.solution.ModerneShopping</string>
 	<key>PROJECT_ID</key>
-	<string>clickstream-uat-devicefarm</string>
+	<string>clickstream-uat-manual</string>
 	<key>STORAGE_BUCKET</key>
-	<string>clickstream-uat-devicefarm.appspot.com</string>
+	<string>clickstream-uat-manual.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:406109657730:ios:879923e52318a6e2bd729b</string>
+	<string>1:1031092888428:ios:c0d6ed08176b90ca4ac949</string>
 </dict>
 </plist>
