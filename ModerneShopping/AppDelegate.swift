@@ -5,14 +5,13 @@
 //  Created by Zhu, Xiaowei on 2023/5/24.
 //
 import Clickstream
-import FirebaseCore
 import UIKit
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     public static var allEventNumber: Int = 0
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         AppDelegate.allEventNumber = UserDefaults.standard.integer(forKey: "allEventNumber")
-        // init clickstream sdk
+        /// init clickstream sdk
         do {
             try ClickstreamAnalytics.initSDK()
             let configuration = try ClickstreamAnalytics.getClickstreamConfiguration()
@@ -21,7 +20,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         } catch {
             print("Failed to initialize ClickstreamAnalytics with \(error)")
         }
-        FirebaseApp.configure()
         return true
     }
 

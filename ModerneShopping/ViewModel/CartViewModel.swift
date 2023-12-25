@@ -6,7 +6,6 @@
 //
 
 import Clickstream
-import Firebase
 import SwiftUI
 
 class CartViewModel: ObservableObject {
@@ -20,18 +19,13 @@ class CartViewModel: ObservableObject {
     ///   - addedProduct: product we want to add
     ///   - quantity: quantity of product we want to add
     func addToCart(addedProduct: Product, quantity: Int) {
-        let event_uuid = UUID().uuidString
-        let event_timestamp = Date().timestamp
         let attributes: ClickstreamAttribute = [
             "product_id": addedProduct.id,
             "product_title": addedProduct.title,
             "product_price": addedProduct.price,
             "product_category": addedProduct.category,
-            "event_uuid": event_uuid,
-            "event_timestamp": event_timestamp,
         ]
         ClickstreamAnalytics.recordEvent("add_to_cart", attributes)
-        Analytics.logEvent("add_to_cart", parameters: attributes)
         AppDelegate.addEvent()
 
         let products = cartProductDic.map(\.key)
@@ -74,18 +68,13 @@ class CartViewModel: ObservableObject {
     }
 
     func removeFromCart(toRemove: Product) {
-        let event_uuid = UUID().uuidString
-        let event_timestamp = Date().timestamp
         let attributes: ClickstreamAttribute = [
             "product_id": toRemove.id,
             "product_title": toRemove.title,
             "product_price": toRemove.price,
             "product_category": toRemove.category,
-            "event_uuid": event_uuid,
-            "event_timestamp": event_timestamp,
         ]
         ClickstreamAnalytics.recordEvent("cart_delete", attributes)
-        Analytics.logEvent("cart_delete", parameters: attributes)
         AppDelegate.addEvent()
         cartProductDic.removeValue(forKey: toRemove)
     }

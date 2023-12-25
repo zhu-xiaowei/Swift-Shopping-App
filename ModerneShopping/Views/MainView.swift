@@ -8,7 +8,6 @@
 import AdSupport
 import AppTrackingTransparency
 import Clickstream
-import Firebase
 import SwiftUI
 
 struct MainView: View {
@@ -22,14 +21,10 @@ struct MainView: View {
                     Image(systemName: "house")
                     Text("Home")
                 }.onAppear {
-                    let event_uuid = UUID().uuidString
-                    let event_timestamp = Date().timestamp
                     let attribute: ClickstreamAttribute = [
-                        "event_uuid": event_uuid,
-                        "event_timestamp": event_timestamp
+                        "tab_name": "home_tab"
                     ]
                     ClickstreamAnalytics.recordEvent("view_home", attribute)
-                    Analytics.logEvent("view_home", parameters: attribute)
                     AppDelegate.addEvent()
                 }
             CartView(cartProducts: cartItems)
@@ -38,14 +33,10 @@ struct MainView: View {
                     Image(systemName: "cart")
                     Text("Cart")
                 }.onAppear {
-                    let event_uuid = UUID().uuidString
-                    let event_timestamp = Date().timestamp
                     let attribute: ClickstreamAttribute = [
-                        "event_uuid": event_uuid,
-                        "event_timestamp": event_timestamp
+                        "tab_name": "cart_tab"
                     ]
                     ClickstreamAnalytics.recordEvent("view_cart", attribute)
-                    Analytics.logEvent("view_cart", parameters: attribute)
                     AppDelegate.addEvent()
                 }
             ProfilView()
@@ -54,14 +45,10 @@ struct MainView: View {
                     Image(systemName: "person")
                     Text("Profile")
                 }.onAppear {
-                    let event_uuid = UUID().uuidString
-                    let event_timestamp = Date().timestamp
                     let attribute: ClickstreamAttribute = [
-                        "event_uuid": event_uuid,
-                        "event_timestamp": event_timestamp
+                        "tab_name": "profile_tab"
                     ]
                     ClickstreamAnalytics.recordEvent("view_profile", attribute)
-                    Analytics.logEvent("view_profile", parameters: attribute)
                     AppDelegate.addEvent()
                 }
         }

@@ -10,8 +10,7 @@
 		3A10018A2A1DDF4300DF72CB /* Clickstream in Frameworks */ = {isa = PBXBuildFile; productRef = 3A1001892A1DDF4300DF72CB /* Clickstream */; };
 		3A10018C2A1DE16C00DF72CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10018B2A1DE16C00DF72CB /* AppDelegate.swift */; };
 		3A10018E2A1DE2B500DF72CB /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A10018D2A1DE2B500DF72CB /* amplifyconfiguration.json */; };
-		3A36DE022A35B1D70040E46D /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3A36DE012A35B1D70040E46D /* FirebaseAnalyticsSwift */; };
-		3A36DE082A35F3AA0040E46D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A36DE072A35F3AA0040E46D /* GoogleService-Info.plist */; };
+		3AEE5C062B2FE8F60035916B /* TestClickstreamApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEE5C052B2FE8F60035916B /* TestClickstreamApi.m */; };
 		9DACF93326E0297B00AD45B7 /* ModerneShoppingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DACF93226E0297B00AD45B7 /* ModerneShoppingApp.swift */; };
 		9DACF93526E0297B00AD45B7 /* ProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DACF93426E0297B00AD45B7 /* ProductView.swift */; };
 		9DACF93726E0297C00AD45B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DACF93626E0297C00AD45B7 /* Assets.xcassets */; };
@@ -82,7 +81,9 @@
 /* Begin PBXFileReference section */
 		3A10018B2A1DE16C00DF72CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A10018D2A1DE2B500DF72CB /* amplifyconfiguration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
-		3A36DE072A35F3AA0040E46D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3AEE5C042B2FE8F60035916B /* ModerneShopping-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ModerneShopping-Bridging-Header.h"; sourceTree = "<group>"; };
+		3AEE5C052B2FE8F60035916B /* TestClickstreamApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestClickstreamApi.m; sourceTree = "<group>"; };
+		3AEE5C0C2B2FFC630035916B /* TestClickstreamApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestClickstreamApi.h; sourceTree = "<group>"; };
 		9DACF92F26E0297B00AD45B7 /* ModerneShopping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModerneShopping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DACF93226E0297B00AD45B7 /* ModerneShoppingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModerneShoppingApp.swift; sourceTree = "<group>"; };
 		9DACF93426E0297B00AD45B7 /* ProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductView.swift; sourceTree = "<group>"; };
@@ -142,7 +143,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A36DE022A35B1D70040E46D /* FirebaseAnalyticsSwift in Frameworks */,
 				9DACF99C26E6710700AD45B7 /* Lottie in Frameworks */,
 				3A10018A2A1DDF4300DF72CB /* Clickstream in Frameworks */,
 			);
@@ -190,7 +190,6 @@
 			children = (
 				9DACF93226E0297B00AD45B7 /* ModerneShoppingApp.swift */,
 				3A10018B2A1DE16C00DF72CB /* AppDelegate.swift */,
-				3A36DE072A35F3AA0040E46D /* GoogleService-Info.plist */,
 				3A10018D2A1DE2B500DF72CB /* amplifyconfiguration.json */,
 				9DACF96526E1CEC500AD45B7 /* Views */,
 				9DACF95826E1C49500AD45B7 /* ViewModel */,
@@ -202,6 +201,9 @@
 				9DACF94626E02B7F00AD45B7 /* products.json */,
 				9DACF93B26E0297C00AD45B7 /* Info.plist */,
 				9DACF93826E0297C00AD45B7 /* Preview Content */,
+				3AEE5C052B2FE8F60035916B /* TestClickstreamApi.m */,
+				3AEE5C042B2FE8F60035916B /* ModerneShopping-Bridging-Header.h */,
+				3AEE5C0C2B2FFC630035916B /* TestClickstreamApi.h */,
 			);
 			path = ModerneShopping;
 			sourceTree = "<group>";
@@ -373,7 +375,6 @@
 			packageProductDependencies = (
 				9DACF99B26E6710700AD45B7 /* Lottie */,
 				3A1001892A1DDF4300DF72CB /* Clickstream */,
-				3A36DE012A35B1D70040E46D /* FirebaseAnalyticsSwift */,
 			);
 			productName = ModerneShopping;
 			productReference = 9DACF92F26E0297B00AD45B7 /* ModerneShopping.app */;
@@ -426,6 +427,7 @@
 				TargetAttributes = {
 					9DACF92E26E0297B00AD45B7 = {
 						CreatedOnToolsVersion = 12.5.1;
+						LastSwiftMigration = 1430;
 					};
 					9DACF9E926EBA9A000AD45B7 = {
 						CreatedOnToolsVersion = 12.5.1;
@@ -449,7 +451,6 @@
 			packageReferences = (
 				9DACF99A26E6710700AD45B7 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				3A1001882A1DDF4300DF72CB /* XCRemoteSwiftPackageReference "clickstream-swift" */,
-				3A36DE002A35B1D70040E46D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 9DACF93026E0297B00AD45B7 /* Products */;
 			projectDirPath = "";
@@ -469,7 +470,6 @@
 			files = (
 				9DACF94726E02B7F00AD45B7 /* products.json in Resources */,
 				9DACF9AC26E6E88100AD45B7 /* api.json in Resources */,
-				3A36DE082A35F3AA0040E46D /* GoogleService-Info.plist in Resources */,
 				9DACF93A26E0297C00AD45B7 /* Preview Assets.xcassets in Resources */,
 				3A10018E2A1DE2B500DF72CB /* amplifyconfiguration.json in Resources */,
 				9DACF9A526E672C600AD45B7 /* productLoading.json in Resources */,
@@ -508,6 +508,7 @@
 				9DACF95E26E1C55400AD45B7 /* CartListView.swift in Sources */,
 				9DACF94C26E0373900AD45B7 /* ShoppingButtonStyle.swift in Sources */,
 				9DACF95726E1A41600AD45B7 /* MainView.swift in Sources */,
+				3AEE5C062B2FE8F60035916B /* TestClickstreamApi.m in Sources */,
 				9DACF9AE26E6F09400AD45B7 /* ProfilButtonMenu.swift in Sources */,
 				9DACF99226E5AA9300AD45B7 /* ProfilView.swift in Sources */,
 				9DACF97026E27D3B00AD45B7 /* Extension+Colors.swift in Sources */,
@@ -695,11 +696,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ModerneShopping/Preview Content\"";
 				DEVELOPMENT_TEAM = ZFD28BX3M6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = ModerneShopping/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -708,6 +711,11 @@
 				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = software.aws.solution.ModerneShopping;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "ModerneShopping/ModerneShopping-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -718,11 +726,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ModerneShopping/Preview Content\"";
 				DEVELOPMENT_TEAM = ZFD28BX3M6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = ModerneShopping/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -731,6 +741,10 @@
 				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = software.aws.solution.ModerneShopping;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "ModerneShopping/ModerneShopping-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -865,15 +879,7 @@
 			repositoryURL = "https://github.com/awslabs/clickstream-swift.git";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.5.0;
-			};
-		};
-		3A36DE002A35B1D70040E46D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.0.0;
+				minimumVersion = 0.9.2;
 			};
 		};
 		9DACF99A26E6710700AD45B7 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
@@ -891,11 +897,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3A1001882A1DDF4300DF72CB /* XCRemoteSwiftPackageReference "clickstream-swift" */;
 			productName = Clickstream;
-		};
-		3A36DE012A35B1D70040E46D /* FirebaseAnalyticsSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3A36DE002A35B1D70040E46D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalyticsSwift;
 		};
 		9DACF99B26E6710700AD45B7 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;

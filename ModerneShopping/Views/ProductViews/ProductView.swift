@@ -6,7 +6,6 @@
 //
 
 import Clickstream
-import Firebase
 import SwiftUI
 
 struct ProductView: View {
@@ -82,18 +81,13 @@ struct ProductView: View {
             }
         }.navigationBarTitleDisplayMode(.large)
             .onAppear {
-                let event_uuid = UUID().uuidString
-                let event_timestamp = Date().timestamp
                 let attributes: ClickstreamAttribute = [
                     "product_id": product.id,
                     "product_title": product.title,
                     "product_price": product.price,
                     "product_category": product.category,
-                    "event_uuid": event_uuid,
-                    "event_timestamp": event_timestamp
                 ]
                 ClickstreamAnalytics.recordEvent("product_click", attributes)
-                Analytics.logEvent("product_click", parameters: attributes)
                 AppDelegate.addEvent()
                 ProductView.isShow = true
             }.onDisappear {

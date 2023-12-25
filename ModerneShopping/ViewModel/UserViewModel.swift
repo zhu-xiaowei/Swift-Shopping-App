@@ -6,7 +6,6 @@
 //
 
 import Clickstream
-import Firebase
 import SwiftUI
 
 class UserViewModel: ObservableObject {
@@ -46,12 +45,6 @@ class UserViewModel: ObservableObject {
                     if let userAPIResults: UserAPIResults = self.user {
                         let user = userAPIResults.results[0]
                         ClickstreamAnalytics.setUserId(user.login.uuid)
-                        let event_uuid = UUID().uuidString
-                        let event_timestamp = Date().timestamp
-                        let attribute: ClickstreamAttribute = [
-                            "event_uuid": event_uuid,
-                            "event_timestamp": event_timestamp
-                        ]
                         let userAttribute = [
                             "_user_name": user.name.first + " " + user.name.last,
                             "_user_email": user.email,
@@ -60,16 +53,7 @@ class UserViewModel: ObservableObject {
                             "_user_city": user.location.city
                         ]
                         ClickstreamAnalytics.addUserAttributes(userAttribute)
-
-                        ClickstreamAnalytics.recordEvent("user_login", attribute)
-
-                        Analytics.setUserID(user.login.uuid)
-                        Analytics.setUserProperty(user.name.first + " " + user.name.last, forName: "_user_name")
-                        Analytics.setUserProperty(user.email, forName: "_user_email")
-                        Analytics.setUserProperty(user.gender, forName: "_user_gender")
-                        Analytics.setUserProperty(user.location.country, forName: "_user_country")
-                        Analytics.setUserProperty(user.location.city, forName: "_user_city")
-                        Analytics.logEvent("user_login", parameters: attribute)
+                        ClickstreamAnalytics.recordEvent("user_login")
                         AppDelegate.addEvent()
                     }
                 }
@@ -93,7 +77,6 @@ class UserViewModel: ObservableObject {
             self.isLoading = false
         }
         ClickstreamAnalytics.setUserId(nil)
-        Analytics.setUserID(nil)
     }
 
     /// validate if the username respect our conditions

@@ -6,7 +6,6 @@
 //
 
 import Clickstream
-import Firebase
 import SwiftUI
 
 struct ProfilButtons: View {
@@ -26,14 +25,7 @@ struct ProfilButtons: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .foregroundColor(.black)
                 }.onAppear {
-                    let event_uuid = UUID().uuidString
-                    let event_timestamp = Date().timestamp
-                    let attribute: ClickstreamAttribute = [
-                        "event_uuid": event_uuid,
-                        "event_timestamp": event_timestamp
-                    ]
-                    ClickstreamAnalytics.recordEvent("update_account_click", attribute)
-                    Analytics.logEvent("update_account_click", parameters: attribute)
+                    ClickstreamAnalytics.recordEvent("update_account_click")
                     AppDelegate.addEvent()
                 }
             }, isActive: $isAccountActive) {
@@ -56,14 +48,7 @@ struct ProfilButtons: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .foregroundColor(.black)
                 }.onAppear {
-                    let event_uuid = UUID().uuidString
-                    let event_timestamp = Date().timestamp
-                    let attribute: ClickstreamAttribute = [
-                        "event_uuid": event_uuid,
-                        "event_timestamp": event_timestamp
-                    ]
-                    ClickstreamAnalytics.recordEvent("history_click", attribute)
-                    Analytics.logEvent("history_click", parameters: attribute)
+                    ClickstreamAnalytics.recordEvent("history_click")
                     AppDelegate.addEvent()
                 }
             }, isActive: $isHistoryActive) {
@@ -85,14 +70,7 @@ struct ProfilButtons: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .foregroundColor(.black)
                 }.onAppear {
-                    let event_uuid = UUID().uuidString
-                    let event_timestamp = Date().timestamp
-                    let attribute: ClickstreamAttribute = [
-                        "event_uuid": event_uuid,
-                        "event_timestamp": event_timestamp
-                    ]
-                    ClickstreamAnalytics.recordEvent("orders_click", attribute)
-                    Analytics.logEvent("orders_click", parameters: attribute)
+                    ClickstreamAnalytics.recordEvent("orders_click")
                     AppDelegate.addEvent()
                 }
             }, isActive: $isOrdersActive) {

@@ -6,7 +6,6 @@
 //
 
 import Clickstream
-import Firebase
 import SwiftUI
 
 struct CartView: View {
@@ -42,14 +41,7 @@ struct CartView: View {
                 }
                 Text("Total: \(cartProducts.totalPrice.format(f: ".2"))$")
                 Button(action: {
-                    let event_uuid = UUID().uuidString
-                    let event_timestamp = Date().timestamp
-                    let attribute: ClickstreamAttribute = [
-                        "event_uuid": event_uuid,
-                        "event_timestamp": event_timestamp
-                    ]
-                    ClickstreamAnalytics.recordEvent("check_out_click", attribute)
-                    Analytics.logEvent("check_out_click", parameters: attribute)
+                    ClickstreamAnalytics.recordEvent("check_out_click")
                     AppDelegate.addEvent()
                     withAnimation { cartProducts.showShowcaseSheet.toggle()
                     }
@@ -86,14 +78,7 @@ struct CartView: View {
     var trailingItem: some View {
         Button(action: { withAnimation {
             showDelete.toggle()
-            let event_uuid = UUID().uuidString
-            let event_timestamp = Date().timestamp
-            let attribute: ClickstreamAttribute = [
-                "event_uuid": event_uuid,
-                "event_timestamp": event_timestamp
-            ]
-            ClickstreamAnalytics.recordEvent("cart_show_delete_click", attribute)
-            Analytics.logEvent("cart_show_delete_click", parameters: attribute)
+            ClickstreamAnalytics.recordEvent("cart_show_delete_click")
             AppDelegate.addEvent()
         }}) {
             Image(systemName: "slider.horizontal.3")

@@ -6,7 +6,6 @@
 //
 
 import Clickstream
-import Firebase
 import SwiftUI
 
 struct HomeView: View {
@@ -27,15 +26,10 @@ struct HomeView: View {
                             .padding()
                         CustomPicker(choosenCategory: $pickedCategory)
                             .onChange(of: pickedCategory, perform: { _ in
-                                let event_uuid = UUID().uuidString
-                                let event_timestamp = Date().timestamp
                                 let attribute: ClickstreamAttribute = [
-                                    "category_name": pickedCategory.rawValue.trim(),
-                                    "event_uuid": event_uuid,
-                                    "event_timestamp": event_timestamp
+                                    "category_name": pickedCategory.rawValue
                                 ]
                                 ClickstreamAnalytics.recordEvent("category_click", attribute)
-                                Analytics.logEvent("category_click", parameters: attribute)
                                 AppDelegate.addEvent()
                                 DispatchQueue.main.async {
                                     productsList.loadProducts(with: pickedCategory)
@@ -69,14 +63,7 @@ struct HomeView: View {
             }.navigationBarTitleDisplayMode(.large)
                 .navigationBarItems(
                     leading: NavigationLink(destination: ProfilView().environmentObject(user).onAppear {
-                        let event_uuid = UUID().uuidString
-                        let event_timestamp = Date().timestamp
-                        let attribute: ClickstreamAttribute = [
-                            "event_uuid": event_uuid,
-                            "event_timestamp": event_timestamp
-                        ]
-                        ClickstreamAnalytics.recordEvent("home_profile_click", attribute)
-                        Analytics.logEvent("home_profile_click", parameters: attribute)
+                        ClickstreamAnalytics.recordEvent("home_profile_click")
                         AppDelegate.addEvent()
                     }) {
                         leadingBarItem(user: user.user?.results[0])
@@ -98,14 +85,7 @@ struct TrailingBarItem: View {
     @EnvironmentObject var cart: CartViewModel
     var body: some View {
         NavigationLink(destination: CartView(cartProducts: cart).onAppear {
-            let event_uuid = UUID().uuidString
-            let event_timestamp = Date().timestamp
-            let attribute: ClickstreamAttribute = [
-                "event_uuid": event_uuid,
-                "event_timestamp": event_timestamp
-            ]
-            ClickstreamAnalytics.recordEvent("home_cart_click", attribute)
-            Analytics.logEvent("home_cart_click", parameters: attribute)
+            ClickstreamAnalytics.recordEvent("home_cart_click")
             AppDelegate.addEvent()
         }) {
             Image(systemName: "cart")
