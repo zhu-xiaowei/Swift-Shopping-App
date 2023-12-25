@@ -14,14 +14,14 @@
 
 /// This method for show how to invoke Clickstream Swift API from Objective-C
 -(void) testClickstreamApi{
-    /// init SDK in Objective-C
+    /// Initialize Clickstream SDK in Objective-C
     NSError *error = nil;
     [ClickstreamObjc initSDKAndReturnError:&error];
     if (error) {
         NSLog(@"Fail to initialize ClickstreamAnalytics: %@", error.localizedDescription);
     }
     
-    /// record an event with item
+    /// Record an event with item
     NSDictionary *attributes = @{
         ClickstreamItemKey.ITEM_ID: @"123",
         @"event_category": @"recommended"

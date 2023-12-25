@@ -11,7 +11,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     public static var allEventNumber: Int = 0
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         AppDelegate.allEventNumber = UserDefaults.standard.integer(forKey: "allEventNumber")
-        /// init clickstream sdk
+        /// Initialize Clickstream SDK
         do {
             try ClickstreamAnalytics.initSDK()
             let configuration = try ClickstreamAnalytics.getClickstreamConfiguration()
