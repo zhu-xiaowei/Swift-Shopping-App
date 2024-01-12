@@ -14,10 +14,11 @@ struct ProductList: View {
     @State private var product: Product? = nil
     var body: some View {
         LazyVGrid(columns: columns) {
-            ForEach(products) { product in
+            ForEach(Array(products.enumerated()), id: \.element.id) { index, product in
                 VStack {
                     Button(action: { self.product = product }) {
                         ProductListItem(product: product)
+                            .accessibilityIdentifier("product_\(index)")
                     }
                     Button(action: {
                         withAnimation {
